@@ -140,7 +140,7 @@ JB :
 timezone : Asia/Kolkata
 
 # taken from: https://help.github.com/en/articles/adding-a-jekyll-theme-to-your-github-pages-site
-theme: cayman
+theme: jekyll-theme-cayman
 
 # taken from: https://github.com/ShirinG/ShirinG.github.io/blob/master/_config.yml
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
