@@ -12,7 +12,7 @@ syntax_highlighter_opts:
 # so be sure to set them if your theme uses them.
 #
 title : Code with Manish
-tagline: Easy reads on Data Science
+tagline: Easy reads on Data Science and Machine Learning
 author :
   name : Manish Saraswat
   email : manish06saraswat@gmail.com
@@ -139,5 +139,12 @@ JB :
 # taken from: https://jekyllrb.com/docs/configuration/options/
 timezone : Asia/Kolkata
 
+# taken from: https://help.github.com/en/articles/adding-a-jekyll-theme-to-your-github-pages-site
+theme: cayman
 
+# taken from: https://github.com/ShirinG/ShirinG.github.io/blob/master/_config.yml
+# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
+# Used for Sitemap.xml and your RSS feed
+description: Easy reads on Data Science and Machine Learning
+url: https://saraswatmks.github.io
  
