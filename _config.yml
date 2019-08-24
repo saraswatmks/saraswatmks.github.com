@@ -14,13 +14,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Building Data Products
-subtitle: real side of machine learning
+subtitle: Do more with machine learning
 email: manish06saraswat@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Building data products is my effort to help data scientists / machine
+  Building data products is my effort to help full stack data scientists / machine
   learning engineers to learn to deploy data science / machine learning models
-  in the apps using latest technologies / microservices and see them making 
-  an impact on the real world users.
+  using latest technologies / microservices and see them making an impact on 
+  the real world users.
 twitter_username: manish_saraswt
 minimal_mistakes_skin: "contrast"
 repository: "saraswatmks/saraswatmks.github.com"
