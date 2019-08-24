@@ -32,7 +32,11 @@ google:
   instant_search: true
 
 # reference taken from https://github.com/daattali/beautiful-jekyll/blob/master/_config.yml
-disqus: "https-saraswat-github-io"
+# disqus: "https-saraswat-github-io"
+comments:
+  provider: "disqus"
+  disqus:
+    shortname: "https-saraswat-github-io"
 
 
 # SEO related
@@ -40,9 +44,15 @@ google_site_verification: "wQFfaZV_3m8VaDZ7hnM4BB5gGuVlZ2fYhBc48Fc3BTo"
 bing_site_verification: "570DB0A17D827E22CAEE287BBFAA2B92"
 
 # Analytics related
-gtag: "G-KLJBFF0EQ0"
-gtm: "GTM-M2F52F9"
-google_analytics: "UA-146372185-1"
+# gtag: "G-KLJBFF0EQ0"
+# gtm: "GTM-M2F52F9"
+
+analytics:
+  provider: "google-gtag"
+  google: 
+    tracking_id: "UA-146372185-1"
+    anonymize_ip: false
+
 
 # Build settings
 markdown: kramdown
@@ -55,6 +65,7 @@ paginate_path: /page:num/
 timezone: Asia/Kolkata # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+breadcrumbs: true
 
 include:
   - _pages
@@ -80,13 +91,6 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
-# mimic GitHub Pages with --safe
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-include-cache
 
 author:
   name   : "Manish Saraswat"
