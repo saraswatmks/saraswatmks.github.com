@@ -59,13 +59,14 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 
 # Outputting
-permalink: /:categories/:title/
+#permalink: /:categories/:title/
+permalink: /:year/:month/:title.html
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: Asia/Kolkata # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-breadcrumbs: true
+#breadcrumbs: true
 
 include:
   - _pages

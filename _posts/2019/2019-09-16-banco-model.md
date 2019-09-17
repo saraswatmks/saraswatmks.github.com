@@ -1,12 +1,11 @@
 ---
 title: "Banco Data Model"
 date: 2019-09-16T15:34:30-04:00
-categories:
-  - blog
 tags:
   - machine learning
   - python
   - scikit-learn
+excerpt: "this line will show up as preview on the posts page"
 ---
 
 ```python
