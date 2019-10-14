@@ -1,12 +1,4 @@
----
-title: Package a Machine Learning Project using Python PEX 
-date: 2019-10-14
-tags:
-- machine learning
-- python
-- scikit-learn
-excerpt: "Use pex python library to package a python project for deployment."
----
+
 ## Introduction
 
 Companies these days are looking for data scientists who can not only build machine learning models but also deploy them. Why? Because, companies are progressing towards data driven product/features development.
@@ -71,7 +63,7 @@ Now, let's add the code to our `datapack` project. Basically, it would do the fo
 
 Now, keep copy-pasting the code and create these scripts at your end. The code is simple and self-explanatory.
 
-**`datapack/datapack/utils/preprocess.py`** : This script contains code to clean text data. We know this beforehand, because we know that our data contains a column called as *text*.
+`datapack/datapack/utils/preprocess.py` : This script contains code to clean text data. We know this beforehand, because we know that our data contains a column called as *text*.
 
 ```python
 import re
@@ -85,12 +77,12 @@ class PreProcess:
         return data
 ```
 
-**`datapack/datapack/main.py`** : This will be the entrypoint of the our project.
+`datapack/datapack/main.py` : This will be the entrypoint of the our project.
 
 ```python
 from datapack.utils.preprocess import PreProcess
 import pandas as pd
-import fire
+import fir
 import configparser
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import GaussianNB
@@ -134,7 +126,7 @@ if __name__ == '__main__':
     fire.Fire(compute)
 ```
 
-**`datapack/setup.py`** : This file is super important for the successful packaging of the project. It defines the entire setup of the project i.e. which directory are the modules, where the data lives and creates `.whl`, `.tar.gz` extensions for package distribution. 
+`datapack/setup.py` : This file is super important for the successful packaging of the project. It defines the entire setup of the project i.e. which directory are the modules, where the data lives and creates `.whl`, `.tar.gz` extensions for package distribution. 
 
 ```python
 from codecs import open as codecs_open
@@ -158,11 +150,11 @@ setup(
 )
 ```
 
-**`datapack/datapack/utils/__init__.py`**  : This file should be empty.
+`datapack/datapack/utils/__init__.py`  : This file should be empty.
 
-**`datapack/datapack/__init__.py`**  : Again, this file should be empty.
+`datapack/datapack/__init__.py`  : Again, this file should be empty.
 
-**`datapack/datapack/docs`** : contains the sample data. You can download the files from here.
+`datapack/datapack/docs` : contains the sample data. You can download the files from here*datapack/datapack/docs* : contains the sample data. You can download the files from here: [sample.csv](/blog/pex_files/sample.csv) and [stopwords.txt](/blog/pex_files/stopwords.txt)
 
 If you have followed all the steps as above, your project should look like this: 
 ```
