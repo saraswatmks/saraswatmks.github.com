@@ -162,7 +162,7 @@ setup(
 
 `datapack/datapack/__init__.py`  : Again, this file should be empty.
 
-`datapack/datapack/docs` : contains the sample data. You can download the files from here*datapack/datapack/docs* : contains the sample data. You can download the files from here: [sample.csv](/blog/pex_files/sample.csv) and [stopwords.txt](/blog/pex_files/stopwords.txt)
+`datapack/datapack/docs` : contains the sample data. You can download the files from here*datapack/datapack/docs* : contains the sample data. You can download the files from here: [sample.csv](https://drive.google.com/open?id=1pKFtTzFgvDHXJqF1hi0red53NyPfIugE) and [stopwords.txt](https://drive.google.com/open?id=1pBGwNC1oiheN_In9q9s0iP9u_Q3I0H8D)
 
 If you have followed all the steps as above, your project should look like this: 
 ```
