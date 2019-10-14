@@ -1,4 +1,3 @@
-
 ---
 title: Simple Guide to Packaging a Machine Learning Project using Python PEX 
 date: 2019-10-14
@@ -8,7 +7,6 @@ tags:
   - scikit-learn
 excerpt: "Using pex python library to package a python project for deployment."
 ---
-
 ## Introduction
 
 Companies these days are looking for data scientists who can not only build machine learning models but also deploy them. Why? Because, companies are progressing towards data driven product/features development.
