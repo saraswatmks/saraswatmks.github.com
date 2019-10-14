@@ -162,7 +162,7 @@ setup(
 
 `datapack/datapack/__init__.py`  : Again, this file should be empty.
 
-`datapack/datapack/docs` : contains the sample data. You can download the files from here*datapack/datapack/docs* : contains the sample data. You can download the files from here: [sample.csv](https://drive.google.com/open?id=1pKFtTzFgvDHXJqF1hi0red53NyPfIugE) and [stopwords.txt](https://drive.google.com/open?id=1pBGwNC1oiheN_In9q9s0iP9u_Q3I0H8D)
+`datapack/datapack/docs` : contains the sample data. You can download the files from here*datapack/datapack/docs* : contains the sample data. You can download the files from here: [sample.csv](https://drive.google.com/open?id=1pKFtTzFgvDHXJqF1hi0red53NyPfIugE){:target="_blank"} and [stopwords.txt](https://drive.google.com/open?id=1pBGwNC1oiheN_In9q9s0iP9u_Q3I0H8D){:target="_blank"}
 
 If you have followed all the steps as above, your project should look like this: 
 ```
@@ -283,4 +283,4 @@ If you've made sure the above two things, just simple copy the .pex file, config
 
 ## Summary
 
-In this tutorial, we learned about packaging your python project using .pex library for deployment. As mentioned above, pex files are nothing but standalone python interpreters. You could actually run `.pex` files as interpreter on your terminal. In the next tutorial, we'll see how use python 3's zipapp module to package the code.
+In this tutorial, we learned about packaging your python project using .pex library for deployment. We saw how to modularise the code using classes and objects. As mentioned above, pex files are nothing but standalone python interpreters. You could actually run `.pex` files as interpreter on your terminal. In the next tutorial, we'll see how use python 3's zipapp module to package the code.
