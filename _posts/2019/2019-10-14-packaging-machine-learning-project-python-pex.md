@@ -271,7 +271,7 @@ It it works, on your terminal you should see :  `finished successfully`
 
 ## 4. Deploy
 
-In deployment, the most commplicated part is to make the project dependencies. You need to make sure that the machine/instance/pod on which you are deploying the model has the same dependencies version. But, no more with pex.
+In deployment, the most complicated part is to manage the project dependencies. Many a times, your deployment would fail because of mismatch between dependencies in your development environment vs production environment. Trust me, it gets frustrating. You need to make sure that the machine/instance/pod on which you are deploying the model has the same dependencies version. But, no more with pex.
 
 In our case, we have the dependencies along with the code. We just need to make sure about two things:
 1. **Python Version:** You need to have the same python version installed to avoid conflicts.
