@@ -48,7 +48,7 @@ bing_site_verification: "570DB0A17D827E22CAEE287BBFAA2B92"
 # gtm: "GTM-M2F52F9"
 
 analytics:
-  provider: "google-gtag"
+  provider: "google"
   google: 
     tracking_id: "UA-146372185-1"
     anonymize_ip: false
