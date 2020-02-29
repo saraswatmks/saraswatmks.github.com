@@ -1,14 +1,11 @@
 ---
 title: "How to create TF-IDF matrix using ngrams in R?"
-excerpt: Create tfidf matrix in R just like using scikit-learn
 date: '2020-02-29'
 tags:
 - machine learning
 - r
 - superml
-output: 
-  html_document: 
-    keep_md: yes
+excerpt: Create tfidf matrix in R just like using scikit-learn
 ---
 
 
