@@ -58,8 +58,8 @@ tf_feats <- tf$fit_transform(df$text)
 
 **Explanation**
 
-*  ngram_range as `c(1,3)` means 1 is the minimum length of ngram and 3 is the maximum length of ngram.
-*  max_df = 0.7 means ignore token (or word) should appear in more than 40% of the documents. 
+*  `ngram_range` as `c(1,3)` means 1 is the minimum length of ngram and 3 is the maximum length of ngram.
+*  `max_df = 0.7` means ignore token (or word) should appear in more than 40% of the documents. 
 * `$new()` method initialises the instance of `TfIdfVectorizer` class.
 * `$fit_transform()` return a matrix of tfidf features.
 
