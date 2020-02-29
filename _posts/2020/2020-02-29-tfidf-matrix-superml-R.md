@@ -8,9 +8,7 @@ tags:
 excerpt: Create tfidf matrix in R just like using scikit-learn
 ---
 
-
-
-### Introduction
+## Introduction
 
 Term Document/Inverse Document Frequency(TF-IDF) is a powerful text analysis technique to find similar documents based their vector representations. In simple words, it weights each token, not only on how many times it has occured in a particular document, but also across all set of documents (also called as corpus), to ensure that we put a lower weight to a token if it occurs too frequently (like stopwords).
 
@@ -25,7 +23,7 @@ install.packages("superml", dependencies = TRUE)
 
 
 
-### TF-IDF Matrix with superml
+## TF-IDF Matrix with superml
 
 Superml following a scikit-learn style api, so if you are familiar with it, superml should be easy for you. In case you are new to it, just follow the explanation below. Superml is based on C++ optimised functions, hence it should be quite fast as well. 
 
@@ -156,7 +154,7 @@ print(preds[1:10])
 ## Levels: 0 1
 ```
 
-### Summary
+## Summary
 
 In this tutorial, we learned to train a random forest model using tfidf ngram features in R. Next, we'll see how to create a simple ngram bag of words features model in R.
 
