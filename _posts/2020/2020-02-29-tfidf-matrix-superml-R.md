@@ -6,11 +6,12 @@ tags:
 - machine learning
 - r
 - superml
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ### Introduction
 
@@ -20,7 +21,8 @@ Let's see how we can create tf-idf matrix using ngrams. Later, we'll train a sim
 
 You can install the package by doing:
 
-```{r, eval=FALSE}
+
+```r
 install.packages("superml", dependencies = TRUE)
 ```
 
@@ -32,7 +34,8 @@ Superml following a scikit-learn style api, so if you are familiar with it, supe
 
 First, we'll try to get a dummy dataset.  
 
-```{r}
+
+```r
 # download data, takes a few seconds
 data <- readLines("https://www.r-bloggers.com/wp-content/uploads/2016/01/vent.txt")
 df <- data.frame(data)
@@ -45,8 +48,16 @@ df$target <- sample(c(0,1), size = nrow(df), replace = T)
 
 Now, we create tfidf features.
 
-```{r}
+
+```r
 library(superml)
+```
+
+```
+## Loading required package: R6
+```
+
+```r
 tf <- TfIdfVectorizer$new(ngram_range = c(1,3), max_df = 0.7)
 tf_feats <- tf$fit_transform(df$text)
 ```
@@ -60,26 +71,55 @@ tf_feats <- tf$fit_transform(df$text)
 
 Let's see how the matrix looks like:
 
-```{r}
+
+```r
 dim(tf_feats)
+```
+
+```
+## [1]   83 2059
 ```
 
 We get 2059 features for the given data. Let's look at the tokens.
 
-```{r}
+
+```r
 colnames(tf_feats)[1:30]
+```
+
+```
+##  [1] "s"             "t"             "charleston"    "west"         
+##  [5] "don"           "people"        "don t"         "see"          
+##  [9] "virginia"      "west virginia" "just"          "news"         
+## [13] "please"        " liar"         " s"            "liar"         
+## [17] "obama"         "republicans"   "want"          "can"          
+## [21] "good"          "hillary"       "problem"       "re"           
+## [25] "show"          "trump"         "us"            " liar "       
+## [29] "breaking"      "breaking news"
 ```
 
 We see some text processing would be great before passing calculating the tfidf features. Let's tke a look at the matrix.
 
-```{r}
+
+```r
 head(tf_feats[1:3,50:60])
+```
+
+```
+##       problem   anyone ben ben carson c carson clear     deal drive every
+## [1,]        0 0.000000   0          0 0      0     0 0.000000     0     0
+## [2,]        0 0.166419   0          0 0      0     0 0.166419     0     0
+## [3,]        0 0.000000   0          0 0      0     0 0.000000     0     0
+##          iran
+## [1,] 0.000000
+## [2,] 0.166419
+## [3,] 0.000000
 ```
 
 Now, let's train a random forest model on these features. But, before that let's split the data into train and test.
 
-```{r}
 
+```r
 n_rows <- nrow(df) %/% 2
 train <- data.frame(tf_feats[1:n_rows,])
 train$target_var <- df[1:n_rows,]$target
@@ -88,21 +128,35 @@ test <- data.frame(tf_feats[n_rows:nrow(df),])
 test$target_var <- df[n_rows:nrow(df),'target']
 
 dim(train)
-dim(test)
+```
 
+```
+## [1]   41 2060
+```
+
+```r
+dim(test)
+```
+
+```
+## [1]   43 2060
 ```
 
 Ideally, we should have dont stratified sampling because the target variable is binary. Here, the idea is to demonstrate the use of superml for building machine learning models on text data.
 
 Let's train a random forest model. All machine learning models in superml are known as `Trainer`.
-```{r}
 
+```r
 rf <- RFTrainer$new(max_features = 50, n_estimators = 100)
 rf$fit(train, 'target_var')
 
 preds <- rf$predict(test)
 print(preds[1:10])
+```
 
+```
+##  [1] 0 0 0 0 0 0 0 0 0 0
+## Levels: 0 1
 ```
 
 ### Summary
