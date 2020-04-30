@@ -19,3 +19,4 @@ Thumbs.db
 .rbenv-version
 .rvmrc
 drafts/
+.ipynb_checkpoints/
