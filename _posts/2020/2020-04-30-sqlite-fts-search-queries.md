@@ -16,7 +16,7 @@ Sqlite offers a powerful way to build applications enabled with text similarity 
 * Full text search (FTS) module is quite old in sqlite. We'll use the latest version, FTS5.
 
 In this tutorial, I'll provide you some common & useful fts search queries which I've often used in my projects.
-<br/>
+
 
 ### Table of Contents
 
@@ -26,7 +26,7 @@ In this tutorial, I'll provide you some common & useful fts search queries which
 4. **Indexing pandas dataframe into sqlite**
 4. **Useful text search queries**
 
-<br/>
+
 
 ### 1. FTS Basics
 
@@ -40,7 +40,7 @@ Remember the following points while using a virtual table:
 * The recommended way to do matching is using the MATCH operator.
 * The default scoring algorithm used is [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) (Best matching 25) algorithm. The best match gets highest score. The default sorting in sqlite, is sort by ascending. Hence, in order to keep the result consistent, the score is multiplied by -1. This way the best match can be ranked first. Don't get confused if you see negative scores.
 
-<br/>
+
 
 ### 2. Setup conda environment
 
@@ -53,7 +53,7 @@ Like mentioned above, the simplest way to use fts5 module is using sqlite3 insta
 
 Now, simply launch ipython or jupyter notebook inside the environment to access full functionalities of sqlite3.
 
-<br/>
+
 
 ### 3. Load Dataset
 
@@ -166,7 +166,7 @@ df.sample(5)
 
 **Note:** For now, we'll be using just  `title`,`genre` and `rating` field for query matching with basic text cleaning.
 
-<br/>
+
 
 ### 4. Indexing pandas dataframe into sqlite
 
@@ -221,7 +221,7 @@ For our case, we are using a combination of unicode61 and porter tokenizer.
 cur.executemany('insert into imdb (title, genre, rating) values (?,?,?);', df[['title', 'genre','star_rating']].to_records(index=False))
 db.commit()
 ```
-<br/>
+
 
 ### 5. Useful text search queries
 
@@ -395,7 +395,7 @@ res
  ('the lord of the rings the fellowship of the ring', 'adventure', 8.8, -3.213583634242071)]
 ```
 
-<br/>
+
 
 Following queries would demonstrate the use of available auxilary functions in sqlite.
 
