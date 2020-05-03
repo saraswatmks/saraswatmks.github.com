@@ -34,7 +34,7 @@ But, what if you can do tasks simultaneously? Yes, completely possible. That wou
 
 ### 2. How asyncio works ? 
 
-Asyncio makes concurrency possible using Coroutines. Coroutines are nothing but python functions prefixed with `async` keyword. For example:
+Asyncio makes concurrency possible using coroutines. Coroutines are nothing but python functions prefixed with `async` keyword. For example:
 
 
 ```python
@@ -70,7 +70,7 @@ print(num_sum(10))
     RuntimeWarning: Enable tracemalloc to get the object allocation traceback
 
 
-The normal function returned an integer (as expected). But, Coroutines return coroutines object which must be awaited using `await` keyword. `async` & `await` for reserved keywords since python 3.6.
+The normal function returned an integer (as expected). But, coroutines return coroutines object which must be awaited using `await` keyword. `async` & `await` for reserved keywords in python.
 
 
 ```python
@@ -80,9 +80,9 @@ print(await num_sum(10))
     10
 
 
-If you are running your code in the jupyter notebook, running the above cell will work. But in a script, it wouldn't work unless the event loop has been initialised. Think of an event loop as current thread responsible to execute the code. Notebook have default access to event loops, scripts don't. Hence, assuming you run it in a script, you can do `asyncio.run(num_sum(10))`:
+If you are running your code in the jupyter notebook, running the above cell will work. But in a script, it wouldn't work unless the event loop has been initialised. Think of an event loop as current thread responsible to execute the code. Notebooks have default access to event loops, scripts don't. Hence, assuming you run it in a script, you can do `asyncio.run(num_sum(10))`:
 
-I'm still curious, how is asyncio able to switch between the tasks? Let's see it with the following examples.
+You might still be wondering, how is asyncio able to switch between the tasks? Let's see it with the following examples.
 
 
 ```python
@@ -92,14 +92,14 @@ def reading_book():
     print("reading page 3")
     print("reading page 4")
 
-def check_whatsapp():
+def checking_whatsapp():
     print("reading new message 1")
     print("reading new message 2")
     print("reading new message 3")
     print("reading new message 4")
 ```
 
-Let's say we are doing these two tasks `reading_book` and `check_whatsapp`. First, it would be good to see how would our tasks look it if we do it sequentially. 
+Let's say we are doing these two tasks `reading_book` and `checking_whatsapp`. First, it would be good to see how would our tasks look it if we do it sequentially. 
 
 
 ```python
@@ -111,7 +111,7 @@ def main(tasks):
 
 ```python
 # execute tasks sequentially
-main([reading_book(), check_whatsapp()])
+main([reading_book(), checking_whatsapp()])
 ```
 
     reading page 1
@@ -126,7 +126,7 @@ main([reading_book(), check_whatsapp()])
 
 As expected, in sequential mode, we can't read whatsapp messages without finishing reading the book pages. In other words, reading pages will block us to read message.
 
-Now, what makes a function behaves likes a coroutine internally is a `yield` command. `yield` is used to create generators. `yield` command helps in suspending the current running command and switching to other task. Let run the above example concurrently.
+Now, what makes a function behaves likes a coroutine internally is a `yield` command. `yield` is used to create generators. `yield` command helps in suspending the current running task while it is running and switches to other task. Let run the above example concurrently.
 
 
 ```python
@@ -139,7 +139,7 @@ def reading_book_concur():
     yield
     print("reading page 4")
 
-def check_whatsapp_concur():
+def checking_whatsapp_concur():
     print("reading new message 1")
     yield
     print("reading new message 2")
@@ -164,7 +164,7 @@ def main(tasks):
 
 ```python
 # execute tasks concurrently
-main([reading_book_concur(), check_whatsapp_concur()])
+main([reading_book_concur(), checking_whatsapp_concur()])
 ```
 
     reading page 1
@@ -181,6 +181,7 @@ Now you see, we are doing both the tasks concurrently. Don't worry if you don't 
 
 
 ```python
+# convert to coroutine
 async def reading_book():
     print("reading page 1")
     await asyncio.sleep(0)
@@ -190,6 +191,7 @@ async def reading_book():
     await asyncio.sleep(0)
     print("reading page 4")
 
+# convert to coroutine
 async def checking_whatsapp():
     print("reading new message 1")
     await asyncio.sleep(0)
@@ -314,7 +316,7 @@ responses = await get_async_response(get_response, my_list)
 ```
 
 
-#### 3.2 Doing parallel computation
+#### 3.2 Doing CPU intensive computation
 
 Let's say we want to do fuzzy match between two list. Since this is cpu intensive task, we won't use async for this.
 
