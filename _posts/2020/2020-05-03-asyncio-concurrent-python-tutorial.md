@@ -224,8 +224,10 @@ await main([reading_book(), checking_whatsapp()])
     reading page 4
     reading new message 4
 
+Few points to note:
 
-`asyncio.sleep` does the same function as `yield`, suspends the execution of current task so it can do the other task.
+* `asyncio.sleep` does the same function as `yield`, suspends the execution of current task so it can do the other task.
+* `asyncio.gather` does similar to `main` function from previous task, switches between tasks.
 
 Let's make it more interesting. Let's say you also want boil some water also while doing other tasks. How can we do that ? Exactly same as above, but since boiling water would take some time, we'll modify the sleep time, show below:
 
