@@ -13,6 +13,8 @@ I've been mainly working on projects involving text data using deep learning. So
 * **Recommendation Models**: Improving user discovery of products on a platform
 * **Text Duplication**: Building a data product which can efficienty identify duplicate text. 
 
-To know about my latest gigs, checkout my linkedin profile.
+I am the author & maintainer of [superml](https://saraswatmks.github.io/superml/) R package. It helps people build ML models in R just like using scikit-learn. A lot of my weekend time goes in improving it. 
+
+To further know about my latest gigs, checkout my linkedin profile.
 
 Adios!
