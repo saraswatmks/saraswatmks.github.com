@@ -181,6 +181,8 @@ Now you see, we are doing both the tasks concurrently. Don't worry if you don't 
 
 
 ```python
+import asyncio
+
 # convert to coroutine
 async def reading_book():
     print("reading page 1")
@@ -286,6 +288,7 @@ In the examples below, we'll use built-in `concurrent` python module to use asyn
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
+import asyncio
 
 async def get_async_response(func, param):
     
