@@ -118,16 +118,9 @@ footer:
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/saraswatmanish"
 
+navbar-links:
+  About Me: "aboutme"
 
-footer-links-active:
-  rss: false
-  facebook: false
-  email: true
-  twitter: true
-  github: true
-  linkedin: true
-  stackoverflow: true
-  
 defaults:
   # _posts
   - scope:
