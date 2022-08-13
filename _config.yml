@@ -41,7 +41,8 @@ comments:
 # SEO related
 google_site_verification: "aKzOYiMMl-_8MQbLQWXZL2-ZnpaFcOmZYWsju3OhXKY"
 bing_site_verification: "570DB0A17D827E22CAEE287BBFAA2B92"
-
+head_scripts:
+  - /assets/js/ga_ads_tracking.js
 # Analytics related
 # gtag: "G-KLJBFF0EQ0"
 # gtm: "GTM-M2F52F9"
@@ -106,7 +107,7 @@ author:
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/saraswatmanish"
     - label: "Stackoverflow"
-      icon: "fa-stack-overflow"
+      icon: "fab fa-stack-overflow"
       url: "https://stackoverflow.com/users/9299259/yolo"
 
 footer:
@@ -130,10 +131,10 @@ defaults:
       layout: single
       classes: wide
       author_profile: true
-      read_time: false
       comments: true
       share: true
       related: true
+      read_time: true
   # _pages
   - scope:
       path: "_pages"
