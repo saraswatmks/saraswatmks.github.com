@@ -1,4 +1,11 @@
-## Hands on tutorial with Polars DataFrames in Python
+---
+title: Hands on tutorial with Polars DataFrames in Python
+date: 2023-04-30
+tags:
+- python
+excerpt: "Using polars python library for large dataset manipulation"
+---
+## Introduction
 
 Handling large datasets locally on laptops is not easy. As a workaround, data scientists either work on a sample data set or spin up spark clusters. Spark clusters don't come cheap. I recently migrated a data science project from spark to python in-memory computation using polars and saved few hunderd dollars weekly cloud cost. Yay!
 
