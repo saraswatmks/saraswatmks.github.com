@@ -128,12 +128,6 @@ df.select(pl.all().is_null().sum())
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
 <small>shape: (1, 8)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th></tr><tr><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td><td>u32</td></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td></tr></tbody></table></div>
 
 
@@ -153,12 +147,6 @@ df.groupby("group").agg(pl.all().sort_by("score",descending=True).first())
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
 <small>shape: (3, 8)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td></tr><tr><td>&quot;two&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td></tr><tr><td>&quot;three&quot;</td><td>&quot;23&quot;</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td></tr></tbody></table></div>
 
 
@@ -172,12 +160,6 @@ df.filter(pl.col("score") == pl.col("score").max().over(["group"]))
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
 <small>shape: (3, 8)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th></tr><tr><td>str</td><td>i16</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>2</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td></tr><tr><td>&quot;two&quot;</td><td>3</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td></tr><tr><td>&quot;three&quot;</td><td>23</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td></tr></tbody></table></div>
 
 
@@ -192,12 +174,7 @@ df.head(5)
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (5, 9)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>mean_over_grp</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>i64</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>170</td></tr><tr><td>&quot;one&quot;</td><td>&quot;98&quot;</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>170</td></tr><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>170</td></tr><tr><td>&quot;two&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>152</td></tr><tr><td>&quot;two&quot;</td><td>&quot;99&quot;</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>152</td></tr></tbody></table></div>
 
 
@@ -211,12 +188,6 @@ df.groupby("group", maintain_order=True).agg(score_list=pl.col("score").apply(li
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
 <small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>score_list</th></tr><tr><td>str</td><td>list[i64]</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>[45, 49, 76]</td></tr><tr><td>&quot;two&quot;</td><td>[83, 69]</td></tr><tr><td>&quot;three&quot;</td><td>[90, 80]</td></tr></tbody></table></div>
 
 
@@ -235,12 +206,7 @@ df.groupby('group').agg(
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3, 5)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>mean_score</th><th>n_rows</th><th>cls_c1_count</th><th>min_date</th></tr><tr><td>str</td><td>f64</td><td>u32</td><td>u32</td><td>date</td></tr></thead><tbody><tr><td>&quot;three&quot;</td><td>85.0</td><td>2</td><td>0</td><td>2023-01-06</td></tr><tr><td>&quot;two&quot;</td><td>76.0</td><td>2</td><td>1</td><td>2023-01-04</td></tr><tr><td>&quot;one&quot;</td><td>56.666667</td><td>3</td><td>0</td><td>2023-01-01</td></tr></tbody></table></div>
 
 
@@ -254,12 +220,7 @@ df.groupby('group').count()
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>count</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>&quot;two&quot;</td><td>2</td></tr><tr><td>&quot;one&quot;</td><td>3</td></tr><tr><td>&quot;three&quot;</td><td>2</td></tr></tbody></table></div>
 
 
@@ -273,12 +234,7 @@ df['group'].value_counts()
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>counts</th></tr><tr><td>str</td><td>u32</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>3</td></tr><tr><td>&quot;two&quot;</td><td>2</td></tr><tr><td>&quot;three&quot;</td><td>2</td></tr></tbody></table></div>
 
 
@@ -303,12 +259,7 @@ df['grade'].head(3)
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3,)</small><table border="1" class="dataframe"><thead><tr><th>grade</th></tr><tr><td>i16</td></tr></thead><tbody><tr><td>1</td></tr><tr><td>98</td></tr><tr><td>2</td></tr></tbody></table></div>
 
 
@@ -360,12 +311,7 @@ df.head()
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 10)</small><table border="1" class="dataframe"><thead><tr><th>group_one</th><th>group_three</th><th>group_two</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th></tr><tr><td>u8</td><td>u8</td><td>u8</td><td>i16</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td></tr></thead><tbody><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td></tr><tr><td>1</td><td>0</td><td>0</td><td>98</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td></tr><tr><td>1</td><td>0</td><td>0</td><td>2</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td></tr><tr><td>0</td><td>0</td><td>1</td><td>3</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td></tr><tr><td>0</td><td>0</td><td>1</td><td>99</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td></tr><tr><td>0</td><td>1</td><td>0</td><td>23</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td></tr><tr><td>0</td><td>1</td><td>0</td><td>11</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td></tr></tbody></table></div>
 
 
@@ -393,12 +339,7 @@ df
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 9)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>score_bin</th></tr><tr><td>str</td><td>i16</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>cat</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>1</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>&quot;1&quot;</td></tr><tr><td>&quot;one&quot;</td><td>98</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>&quot;3&quot;</td></tr><tr><td>&quot;one&quot;</td><td>2</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>&quot;5&quot;</td></tr><tr><td>&quot;two&quot;</td><td>3</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>&quot;5&quot;</td></tr><tr><td>&quot;two&quot;</td><td>99</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>&quot;1&quot;</td></tr><tr><td>&quot;three&quot;</td><td>23</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>&quot;5&quot;</td></tr><tr><td>&quot;three&quot;</td><td>11</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td><td>&quot;1&quot;</td></tr></tbody></table></div>
 
 
@@ -415,12 +356,7 @@ df.pivot(values="rating", index="score_bin", columns="group", aggregate_function
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3, 4)</small><table border="1" class="dataframe"><thead><tr><th>score_bin</th><th>one</th><th>two</th><th>three</th></tr><tr><td>cat</td><td>f64</td><td>f64</td><td>f64</td></tr></thead><tbody><tr><td>&quot;1&quot;</td><td>4.5</td><td>1.2</td><td>9.1</td></tr><tr><td>&quot;3&quot;</td><td>3.5</td><td>null</td><td>null</td></tr><tr><td>&quot;5&quot;</td><td>4.0</td><td>1.0</td><td>9.4</td></tr></tbody></table></div>
 
 
@@ -440,12 +376,7 @@ df
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 10)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>score_bin</th><th>merged_cat</th></tr><tr><td>str</td><td>i16</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>cat</td><td>struct[2]</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>1</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>&quot;1&quot;</td><td>{&quot;one&quot;,&quot;1&quot;}</td></tr><tr><td>&quot;one&quot;</td><td>98</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>&quot;3&quot;</td><td>{&quot;one&quot;,&quot;3&quot;}</td></tr><tr><td>&quot;one&quot;</td><td>2</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>&quot;5&quot;</td><td>{&quot;one&quot;,&quot;5&quot;}</td></tr><tr><td>&quot;two&quot;</td><td>3</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>&quot;5&quot;</td><td>{&quot;two&quot;,&quot;5&quot;}</td></tr><tr><td>&quot;two&quot;</td><td>99</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>&quot;1&quot;</td><td>{&quot;two&quot;,&quot;1&quot;}</td></tr><tr><td>&quot;three&quot;</td><td>23</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>&quot;5&quot;</td><td>{&quot;three&quot;,&quot;5&quot;}</td></tr><tr><td>&quot;three&quot;</td><td>11</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td><td>&quot;1&quot;</td><td>{&quot;three&quot;,&quot;1&quot;}</td></tr></tbody></table></div>
 
 
@@ -475,12 +406,7 @@ df
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 11)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>score_bin</th><th>merged_cat</th><th>merged_list</th></tr><tr><td>str</td><td>i16</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>cat</td><td>struct[2]</td><td>list[str]</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>1</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>&quot;1&quot;</td><td>{&quot;one&quot;,&quot;1&quot;}</td><td>[&quot;one&quot;, &quot;x1&quot;]</td></tr><tr><td>&quot;one&quot;</td><td>98</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>&quot;3&quot;</td><td>{&quot;one&quot;,&quot;3&quot;}</td><td>[&quot;one&quot;, null]</td></tr><tr><td>&quot;one&quot;</td><td>2</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>&quot;5&quot;</td><td>{&quot;one&quot;,&quot;5&quot;}</td><td>[&quot;one&quot;, null]</td></tr><tr><td>&quot;two&quot;</td><td>3</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>&quot;5&quot;</td><td>{&quot;two&quot;,&quot;5&quot;}</td><td>[&quot;two&quot;, &quot;c1&quot;]</td></tr><tr><td>&quot;two&quot;</td><td>99</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>&quot;1&quot;</td><td>{&quot;two&quot;,&quot;1&quot;}</td><td>[&quot;two&quot;, &quot;c2&quot;]</td></tr><tr><td>&quot;three&quot;</td><td>23</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>&quot;5&quot;</td><td>{&quot;three&quot;,&quot;5&quot;}</td><td>[&quot;three&quot;, &quot;x2&quot;]</td></tr><tr><td>&quot;three&quot;</td><td>11</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td><td>&quot;1&quot;</td><td>{&quot;three&quot;,&quot;1&quot;}</td><td>[&quot;three&quot;, &quot;j1&quot;]</td></tr></tbody></table></div>
 
 
@@ -523,12 +449,7 @@ df.explode(["col1"]).explode(["col2"]).head(4)
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (4, 3)</small><table border="1" class="dataframe"><thead><tr><th>row_nr</th><th>col1</th><th>col2</th></tr><tr><td>u32</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>0</td><td>&quot;X&quot;</td><td>&quot;A&quot;</td></tr><tr><td>0</td><td>&quot;X&quot;</td><td>&quot;B&quot;</td></tr><tr><td>0</td><td>&quot;X&quot;</td><td>&quot;C&quot;</td></tr><tr><td>0</td><td>&quot;Y&quot;</td><td>&quot;A&quot;</td></tr></tbody></table></div>
 
 
@@ -548,12 +469,7 @@ df.select(pl.all().exclude(['score']).suffix('_pre')).head(3)
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (3, 8)</small><table border="1" class="dataframe"><thead><tr><th>group_pre</th><th>grade_pre</th><th>date1_pre</th><th>date2_pre</th><th>rating_pre</th><th>zone_pre</th><th>class_pre</th><th>mean_over_grp_pre</th></tr><tr><td>str</td><td>str</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>i64</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>170</td></tr><tr><td>&quot;one&quot;</td><td>&quot;98&quot;</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>170</td></tr><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>170</td></tr></tbody></table></div>
 
 
@@ -567,12 +483,7 @@ df.with_columns(pl.col('group').str.to_uppercase()).head()
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (5, 9)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>mean_over_grp</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>i64</td></tr></thead><tbody><tr><td>&quot;ONE&quot;</td><td>&quot;1&quot;</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>170</td></tr><tr><td>&quot;ONE&quot;</td><td>&quot;98&quot;</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>170</td></tr><tr><td>&quot;ONE&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>170</td></tr><tr><td>&quot;TWO&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>152</td></tr><tr><td>&quot;TWO&quot;</td><td>&quot;99&quot;</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>152</td></tr></tbody></table></div>
 
 
@@ -592,12 +503,7 @@ df.with_columns(pl.col('group').str.to_uppercase()).head()
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 12)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>mean_over_grp</th><th>merged_list</th><th>m_con</th><th>v4</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>i64</td><td>list[str]</td><td>str</td><td>list[str]</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>170</td><td>[&quot;one&quot;, &quot;x1&quot;]</td><td>&quot;one_x1&quot;</td><td>[&quot;one&quot;, &quot;x1&quot;, … &quot;x1&quot;]</td></tr><tr><td>&quot;one&quot;</td><td>&quot;98&quot;</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>170</td><td>[&quot;one&quot;, null]</td><td>&quot;one_null&quot;</td><td>[&quot;one&quot;, null, … null]</td></tr><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>170</td><td>[&quot;one&quot;, null]</td><td>&quot;one_null&quot;</td><td>[&quot;one&quot;, null, … null]</td></tr><tr><td>&quot;two&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>152</td><td>[&quot;two&quot;, &quot;c1&quot;]</td><td>&quot;two_c1&quot;</td><td>[&quot;two&quot;, &quot;c1&quot;, … &quot;c1&quot;]</td></tr><tr><td>&quot;two&quot;</td><td>&quot;99&quot;</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>152</td><td>[&quot;two&quot;, &quot;c2&quot;]</td><td>&quot;two_c2&quot;</td><td>[&quot;two&quot;, &quot;c2&quot;, … &quot;c2&quot;]</td></tr><tr><td>&quot;three&quot;</td><td>&quot;23&quot;</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>170</td><td>[&quot;three&quot;, &quot;x2&quot;]</td><td>&quot;three_x2&quot;</td><td>[&quot;three&quot;, &quot;x2&quot;, … &quot;x2&quot;]</td></tr><tr><td>&quot;three&quot;</td><td>&quot;11&quot;</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td><td>170</td><td>[&quot;three&quot;, &quot;j1&quot;]</td><td>&quot;three_j1&quot;</td><td>[&quot;three&quot;, &quot;j1&quot;, … &quot;j1&quot;]</td></tr></tbody></table></div>
 
 
@@ -625,12 +531,7 @@ df.with_columns(day = pl.col('date1').dt.day(),
 
 
 
-<div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
-  text-align: right;
-}
-</style>
+
 <small>shape: (7, 13)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>mean_over_grp</th><th>day</th><th>month</th><th>year</th><th>year_mon</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td><td>i64</td><td>u32</td><td>u32</td><td>i32</td><td>str</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td><td>170</td><td>1</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;one&quot;</td><td>&quot;98&quot;</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td><td>170</td><td>2</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td><td>170</td><td>3</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;two&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td><td>152</td><td>4</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;two&quot;</td><td>&quot;99&quot;</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td><td>152</td><td>5</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;three&quot;</td><td>&quot;23&quot;</td><td>90</td><td>2023-01-06</td><td>2023-02-06</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>170</td><td>6</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr><tr><td>&quot;three&quot;</td><td>&quot;11&quot;</td><td>80</td><td>2023-01-07</td><td>2023-02-07</td><td>9.1</td><td>1.0</td><td>&quot;j1&quot;</td><td>170</td><td>7</td><td>1</td><td>2023</td><td>&quot;2023-01&quot;</td></tr></tbody></table></div>
 
 
