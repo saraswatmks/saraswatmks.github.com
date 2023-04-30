@@ -1,4 +1,4 @@
-## Hands on tutorials with Polars DataFrames in Python
+## Hands on tutorial with Polars DataFrames in Python
 
 Handling large datasets locally on laptops is not easy. As a workaround, data scientists either work on a sample data set or spin up spark clusters. Spark clusters don't come cheap. I recently migrated a data science project from spark to python in-memory computation using polars and saved few hunderd dollars weekly cloud cost. Yay!
 
