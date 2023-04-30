@@ -83,11 +83,6 @@ df.head()
 
 
 
-<div><style>
-{
-  text-align: right;
-}
-</style>
 <small>shape: (5, 8)</small><table border="1" class="dataframe"><thead><tr><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th></tr><tr><td>str</td><td>str</td><td>i64</td><td>date</td><td>date</td><td>f64</td><td>f64</td><td>str</td></tr></thead><tbody><tr><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>45</td><td>2023-01-01</td><td>2023-02-01</td><td>4.5</td><td>null</td><td>&quot;x1&quot;</td></tr><tr><td>&quot;one&quot;</td><td>&quot;98&quot;</td><td>49</td><td>2023-01-02</td><td>2023-02-02</td><td>3.5</td><td>NaN</td><td>null</td></tr><tr><td>&quot;one&quot;</td><td>&quot;2&quot;</td><td>76</td><td>2023-01-03</td><td>2023-02-03</td><td>4.0</td><td>1.0</td><td>null</td></tr><tr><td>&quot;two&quot;</td><td>&quot;3&quot;</td><td>83</td><td>2023-01-04</td><td>2023-02-04</td><td>1.0</td><td>2.0</td><td>&quot;c1&quot;</td></tr><tr><td>&quot;two&quot;</td><td>&quot;99&quot;</td><td>69</td><td>2023-01-05</td><td>2023-02-05</td><td>1.2</td><td>4.0</td><td>&quot;c2&quot;</td></tr></tbody></table></div>
 
 
@@ -117,11 +112,6 @@ df.describe()
 
 
 
-<div><style>
-{
-  text-align: right;
-}
-</style>
 <small>shape: (9, 10)</small><table border="1" class="dataframe"><thead><tr><th>describe</th><th>group</th><th>grade</th><th>score</th><th>date1</th><th>date2</th><th>rating</th><th>zone</th><th>class</th><th>mean_over_grp</th></tr><tr><td>str</td><td>str</td><td>str</td><td>f64</td><td>str</td><td>str</td><td>f64</td><td>f64</td><td>str</td><td>f64</td></tr></thead><tbody><tr><td>&quot;count&quot;</td><td>&quot;7&quot;</td><td>&quot;7&quot;</td><td>7.0</td><td>&quot;7&quot;</td><td>&quot;7&quot;</td><td>7.0</td><td>7.0</td><td>&quot;7&quot;</td><td>7.0</td></tr><tr><td>&quot;null_count&quot;</td><td>&quot;0&quot;</td><td>&quot;0&quot;</td><td>0.0</td><td>&quot;0&quot;</td><td>&quot;0&quot;</td><td>0.0</td><td>1.0</td><td>&quot;2&quot;</td><td>0.0</td></tr><tr><td>&quot;mean&quot;</td><td>null</td><td>null</td><td>70.285714</td><td>null</td><td>null</td><td>4.671429</td><td>NaN</td><td>null</td><td>164.857143</td></tr><tr><td>&quot;std&quot;</td><td>null</td><td>null</td><td>17.182494</td><td>null</td><td>null</td><td>3.39986</td><td>NaN</td><td>null</td><td>8.783101</td></tr><tr><td>&quot;min&quot;</td><td>&quot;one&quot;</td><td>&quot;1&quot;</td><td>45.0</td><td>&quot;2023-01-01&quot;</td><td>&quot;2023-02-01&quot;</td><td>1.0</td><td>1.0</td><td>&quot;c1&quot;</td><td>152.0</td></tr><tr><td>&quot;max&quot;</td><td>&quot;two&quot;</td><td>&quot;99&quot;</td><td>90.0</td><td>&quot;2023-01-07&quot;</td><td>&quot;2023-02-07&quot;</td><td>9.4</td><td>5.0</td><td>&quot;x2&quot;</td><td>170.0</td></tr><tr><td>&quot;median&quot;</td><td>null</td><td>null</td><td>76.0</td><td>null</td><td>null</td><td>4.0</td><td>3.0</td><td>null</td><td>170.0</td></tr><tr><td>&quot;25%&quot;</td><td>null</td><td>null</td><td>49.0</td><td>null</td><td>null</td><td>1.2</td><td>1.0</td><td>null</td><td>152.0</td></tr><tr><td>&quot;75%&quot;</td><td>null</td><td>null</td><td>83.0</td><td>null</td><td>null</td><td>9.1</td><td>5.0</td><td>null</td><td>170.0</td></tr></tbody></table></div>
 
 
