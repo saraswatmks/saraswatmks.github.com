@@ -84,8 +84,7 @@ df.head()
 
 
 <div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
+{
   text-align: right;
 }
 </style>
@@ -119,8 +118,7 @@ df.describe()
 
 
 <div><style>
-.dataframe > thead > tr > th,
-.dataframe > tbody > tr > td {
+{
   text-align: right;
 }
 </style>
