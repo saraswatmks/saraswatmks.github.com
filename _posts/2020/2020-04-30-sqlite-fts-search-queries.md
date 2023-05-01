@@ -6,6 +6,7 @@ tags:
 - python
 - sqlite
 excerpt: "Learning to use FTS5 with sqlite for full text search applications"
+image: /assets/images/pythonlogopy.jpeg
 ---
 ### Introduction
 
