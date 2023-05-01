@@ -6,6 +6,7 @@ tags:
 - python
 - scikit-learn
 excerpt: "Use pex python library to package a python project for deployment."
+image: /assets/images/pythonlogopy.jpeg
 ---
 ## Introduction
 
