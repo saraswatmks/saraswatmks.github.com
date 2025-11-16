@@ -4,6 +4,10 @@ date: 2023-04-30
 tags:
 - python
 excerpt: "Tutorial to work on large datasets in memory Polars DataFrames in Python"
+header:
+  teaser: /assets/images/polarspy.png
+  overlay_image: /assets/images/polarspy.png
+  overlay_filter: 0.5
 ---
 
 ## Introduction

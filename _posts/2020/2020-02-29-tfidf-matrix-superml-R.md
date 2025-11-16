@@ -6,6 +6,10 @@ tags:
 - r
 - superml
 excerpt: Create tfidf matrix in R just like using scikit-learn
+header:
+  teaser: /assets/images/R_logo.png
+  overlay_image: /assets/images/R_logo.png
+  overlay_filter: 0.5
 ---
 ## Introduction
 

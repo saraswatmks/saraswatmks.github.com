@@ -1,12 +1,15 @@
 ---
-title: Packaging a Machine Learning Project using Python PEX 
+title: Packaging a Machine Learning Project using Python PEX
 date: 2019-10-14
 tags:
 - machine learning
 - python
 - scikit-learn
 excerpt: "Use pex python library to package a python project for deployment."
-image: /assets/images/pythonlogopy.jpeg
+header:
+  teaser: /assets/images/pythonlogopy.jpeg
+  overlay_image: /assets/images/pythonlogopy.jpeg
+  overlay_filter: 0.5
 ---
 ## Introduction
 

@@ -13,13 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Building Data Products
-subtitle: Do more with machine learning
+title: Floating Bytes
+subtitle: Build Better AI
 description: >- # this means to ignore newlines until "baseurl:"
-  Building data products is my effort to help full stack data scientists / machine
-  learning engineers to learn to deploy data science / machine learning models
-  using latest technologies / microservices and see them making an impact on 
-  the real world users.
+  Floating Bytes is my place to share my knowledge, learnings with my community and 
+  have useful & animated discussions.
 twitter_username: manish_saraswt
 minimal_mistakes_skin: "contrast"
 repository: "saraswatmks/saraswatmks.github.com"
@@ -96,12 +94,9 @@ author:
   bio: "Loves running, building & breaking stuffs:)"
   location: Berlin, Germany
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
+    - label: "X"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/manish_saraswt"
+      url: "https://x.com/manish_saraswt"
     - label: "Linkedin"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/saraswatmanish"
@@ -111,9 +106,9 @@ author:
 
 footer:
   links:
-    - label: "Twitter"
+    - label: "X"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/manish_saraswt"
+      url: "https://x.com/manish_saraswt"
     - label: "Linkedin"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/saraswatmanish"

@@ -1,12 +1,15 @@
 ---
-title: Useful Full Text Search (FTS) queries with sqlite in Python 3.7 
+title: Useful Full Text Search (FTS) queries with sqlite in Python 3.7
 date: 2020-04-30
 tags:
 - text matching
 - python
 - sqlite
 excerpt: "Learning to use FTS5 with sqlite for full text search applications"
-image: /assets/images/pythonlogopy.jpeg
+header:
+  teaser: /assets/images/pythonlogopy.jpeg
+  overlay_image: /assets/images/pythonlogopy.jpeg
+  overlay_filter: 0.5
 ---
 ### Introduction
 

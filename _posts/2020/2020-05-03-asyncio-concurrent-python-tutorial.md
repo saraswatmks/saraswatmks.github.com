@@ -6,6 +6,10 @@ tags:
 - python
 - parallel
 excerpt: "Understanding asyncio using simple examples in python 3.7"
+header:
+  teaser: /assets/images/pythonlogopy.jpeg
+  overlay_image: /assets/images/pythonlogopy.jpeg
+  overlay_filter: 0.5
 ---
 
 ### Introduction

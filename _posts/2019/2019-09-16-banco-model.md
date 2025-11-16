@@ -6,6 +6,10 @@ tags:
   - python
   - scikit-learn
 excerpt: "this line will show up as preview on the posts page"
+header:
+  teaser: /assets/images/pythonlogopy.jpeg
+  overlay_image: /assets/images/pythonlogopy.jpeg
+  overlay_filter: 0.5
 ---
 
 ```python
