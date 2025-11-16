@@ -4,7 +4,7 @@ date: 2025-11-14
 tags:
 - llm
 - vllm
-excerpt: "Self learned lessons on deploying large language models in productions using vLLM"
+excerpt: "Lessons learned from deploying large language models in productions using vLLM"
 header:
   teaser: /assets/images/lessons_learnt_llm.png
   overlay_image: /assets/images/lessons_learnt_llm.png
