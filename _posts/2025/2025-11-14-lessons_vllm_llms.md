@@ -13,7 +13,7 @@ header:
 
 # 5 Lessons from Deploying LLMs in Production using vLLM
 
-Deploying an LLM has become quite easy these days. With libraries like vLLM, tensorRT-LLM etc you can deploy a huggingface or local model in few minutes. It's not a challenging task anymore.
+Deploying a LLM has become quite easy these days. With libraries like vLLM, tensorRT-LLM etc you can deploy a huggingface or local model in few minutes. It's not a challenging task anymore.
 
 The real challenge is still figuring out how to scale your deployed LLMs on your own hardware (H100, A100, A40 GPUs). Having deployed tiny to large LLMs, I have gone through the struggle of doing numerous deployments, optimisations, load tests to find a scalable LLM serving configuration. 
 
@@ -27,7 +27,7 @@ In this post, I'll share some learning and tips which I have learnt after deploy
 3. [Batch Size Follows Concurrency](#3-batch-size-follows-concurrency)
 4. [Choose your Metrics](#4-choose-your-metrics)
 5. [Plan Sequential LLM Calls](#5-plan-sequential-llm-calls)
-6. [Summary](#6-summary)
+6. [Summary](#summary)
 
 ---
 
@@ -41,9 +41,9 @@ Imagine I am using a Gemma 27B model (with FP16 weights) on A100 80GB GPU.
 
 With FP16, we know each weight take 2 bytes, so the total memory needed by the model is: 27B * 2 bytes = 54GB. Ok, so far we have already used 67% of the hardware memory. 
 
-We are left with 80GB - 54GB - (6GB overhad) = 20GB. We have this memory available for KV cache. In order to estimate KV cache size, we must know the architechture details of the gemma model. 
+We are left with 80GB - 54GB - (6GB overhead) = 20GB. We have this memory available for KV cache. In order to estimate KV cache size, we must know the architechture details of the gemma model. 
 
-Lets make a few assumptions about the model parameters: 
+Let's make a few assumptions about the model parameters: 
 
 ```
 n_layers = 42 (refers to no. of transformer blocks)  
@@ -63,7 +63,7 @@ Here we multipied by 2 because the KV cache consists of two matrices: Keys and V
 
 Remember KV cache matrix is stored per token. What are these tokens ? They are nothing but your input prompt + generated tokens.   
 
-Lets assume, our input prompt contains 500 tokens. So, 1 input sequence contains 500 tokens. Lets say, for generation, you have set max_tokens=50. 
+Let's assume, our input prompt contains 500 tokens. So, 1 input sequence contains 500 tokens. Let's say, for generation, you have set max_tokens=50. 
 
 For 1 sequence, KV cache calculation becomes: 
 
@@ -76,7 +76,7 @@ If you remember, we have 20GB left for KV cache, so in total by allocating all 2
 max_sequences_possible = 20GB / 378MB = 58 sequences  
 ```
 
-Now, we know given our hardware, we can process 58 requests in parallel. Lets say, processing 1 sequence takes 5 seconds, then we can calculate RPS:
+Now, we know given our hardware, we can process 58 requests in parallel. Let's say, processing 1 sequence takes 5 seconds, then we can calculate RPS:
 
 ```
 RPS = 59 sequences/ 5 seconds = 11.8 requests/second
@@ -99,7 +99,7 @@ For example: In vLLM:
 For instance, if you are aiming for 10rps and you set the following configuration:
 `--max-num-seqs 256 --max-num-batched-tokens 32768` 
 
-You are heavily **underutilising** the resources here. Its like you have a 256 seat bus but you are only carrying 10 passengers per trip. Your GPU has allocated memory but it is not being used. 
+You are heavily **underutilising** the resources here. It's like you have a 256 seater bus but you are only carrying 10 passengers per trip. Your GPU has allocated memory but it is not being used. 
 
 You might be wondering, what is the optimal value to use? 
 
@@ -182,7 +182,7 @@ For API server, I use [locust](https://locust.io/) and track the following metri
 
 When your application makes multiple LLM calls per user request, you need MORE concurrent users to keep the GPU busy.
 
-Lets see why:
+Let's see why:
 
 *Single LLM call per request:*
 ```
@@ -207,7 +207,7 @@ GPU timeline:
 GPU busy: 700ms / 1000ms = 70% (30% idle between calls!)
 ```
 
-This normally happens if you have are using a reasoning agent or a support agent, which needs to make multiple LLM calls to generate a response. 
+This normally happens if you are using a reasoning agent or created a custom agent, which needs to make multiple LLM calls to generate a response. 
 
 In such situations, a better way to achieve higher GPU utilisation is by allowing more concurrent users:
 
@@ -222,7 +222,7 @@ Now GPU can batch:
 - GPU busy: 95%+
 ```
 
-The most common way to enable support for concurrent users it to fork more API workers. If you are using FastAPI, running the server behind gunicorn handles concurrency effortlessly.
+The most common way to enable support for concurrent users is to fork more API workers. If you are using FastAPI, running the server behind gunicorn proxy handles concurrency effortlessly.
 
 
 
