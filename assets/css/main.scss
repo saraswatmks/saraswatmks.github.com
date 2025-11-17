@@ -479,3 +479,13 @@ a {
 a:hover {
   color: var(--secondary-color);
 }
+
+/* Hide Disqus Recommendations */
+#disqus_recommendations,
+[id^="dsq-app"] iframe[title*="Recommended"],
+.dsq-recommendations-widget,
+iframe[src*="recommendations"] {
+  display: none !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}

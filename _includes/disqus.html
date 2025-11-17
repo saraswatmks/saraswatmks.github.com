@@ -6,6 +6,11 @@
         /* ensure that pages with query string get the same discussion */
             var url_parts = window.location.href.split("?");
             var disqus_url = url_parts[0];
+        /* Disqus configuration to disable recommendations */
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_url;
+        };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
