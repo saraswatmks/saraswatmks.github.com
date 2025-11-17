@@ -489,3 +489,26 @@ iframe[src*="recommendations"] {
   height: 0 !important;
   visibility: hidden !important;
 }
+
+/* Remove horizontal lines after post content */
+.page__footer,
+.page__related,
+.page__share,
+.page__comments-title,
+.page__comments {
+  border-top: none !important;
+  padding-top: 1rem !important;
+}
+
+.page__footer-follow,
+.social-share {
+  border-top: none !important;
+}
+
+/* Remove all section divider lines */
+.page__content + .page__share,
+.page__share + .page__related,
+.page__related + .page__comments {
+  border-top: none !important;
+  margin-top: 1rem !important;
+}
