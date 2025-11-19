@@ -242,6 +242,6 @@ A lower GPU utilisation hints at:
 
 I hope this post helped you to learn small but crucial things about deploying LLMs using vLLM. 
 
-I am curious to hear what else do you do to make your LLM inference scalable.
+I am curious to hear in the comments below what else do you do to make your LLM inference scalable.
 
 ---- 
