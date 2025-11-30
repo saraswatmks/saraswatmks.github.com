@@ -93,7 +93,7 @@ plugins:
 author:
   name: "Manish Saraswat"
   avatar: "/assets/images/manish-photo.jpg"
-  bio: "Favourite Staff Engineer"
+  bio: "Prod Staff Engineer"
   location: Berlin, Germany
   links:
     - label: "X"
