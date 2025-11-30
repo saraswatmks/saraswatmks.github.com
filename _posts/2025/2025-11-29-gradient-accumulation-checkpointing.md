@@ -4,7 +4,7 @@ date: 2025-11-29
 tags:
 - deep-learning
 - pytorch
-- training
+- llm
 excerpt: "Basics of gradient accumulation and gradient checkpointing to train LLMs"
 header:
   teaser: /assets/images/checkpoint_grad.png
@@ -45,7 +45,7 @@ Let's dive in.
 
 ### Why Are Optimizer States So Large?
 
-In general, optimizers are used to update the weights in the network. They make sure the gradient calculated is "decent" enough and is following the direction of minima.
+In general, optimizers plays a key role in updating the weights of a network. They make sure the gradient calculated is "decent" enough and is following the direction of minima.
 
 **Basic weight update rule:**
 
@@ -56,7 +56,7 @@ Where:
 - $\eta$ = learning rate
 - $\nabla_\theta \mathcal{L}$ = gradient of loss with respect to parameters
 
-**Problem:** Raw gradients are noisy and can vary wildly between batches. This is where optimizers like Adam come in.
+The problem here is, raw gradients are noisy and can vary wildly between batches. This is where optimizers like Adam come in.
 
 The **Adam optimizer** (most commonly used for training LLMs) maintains **two moving averages** for each parameter:
 
@@ -110,6 +110,8 @@ for step in range(N):
     #          learning  momentum   scale adjustment
     #           rate    (direction) (per-parameter)
 ```
+As you can see, eventually it comes down to scaling `lr` using momentum and variance.
+
 The inclusion of beta1 and beta2 makes sure the latest gradient shouldn't overpower the weight but instead gives higher weightage to gradients seen so far for stable learning.
 
 Coming back to the problem above, for a 7B parameter model, we must store `m` and `v` for **all 7 billion parameters**!
