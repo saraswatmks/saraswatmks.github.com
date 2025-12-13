@@ -20,9 +20,6 @@ But what if you need to process longer documents—say 32K or 128K tokens? This 
 
 In this post, I'll try to answer some of the most commonly asked questions around RoPE scaling. 
 
-Note: In this post, context window or context length means the same.
-
-
 
 ## What is RoPE?
 
@@ -35,7 +32,8 @@ You might be thinking, why do we need to encode positions? It's because, transfo
 Position encodings tell the model **where each token is** in the sequence.
 
 
-**Example from Llama-2 code:**
+Below is a code sneak peak from Llama 2 to show how they included RoPE scaling:
+
 ```python
 # In LlamaAttention forward pass
 def forward(self, hidden_states, position_ids):
@@ -46,6 +44,7 @@ def forward(self, hidden_states, position_ids):
 
     # Apply RoPE to Q and K (THIS is where position info is injected)
     cos, sin = self.rotary_emb(v, seq_len=position_ids.max() + 1)
+    # Apply scaling to Q, K vectors ! <- Pay Attention
     q, k = apply_rotary_pos_emb(q, k, cos, sin, position_ids)
 
     # Compute attention
