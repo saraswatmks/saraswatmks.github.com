@@ -31,7 +31,6 @@ You might be thinking, why do we need to encode positions? It's because, transfo
 
 Position encodings tell the model **where each token is** in the sequence.
 
-
 Below is a code sneak peak from Llama 2 to show how they included RoPE scaling:
 
 ```python
