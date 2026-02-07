@@ -47,8 +47,6 @@ Instead of training your model to predict "Restaurant A is 4.2 stars" and "Resta
 
 This is what LightGBM's pairwise ranking objectives do. And it turns out this seemingly small shift changes everything as shown below:
 
-<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
-
 <div class="mermaid">
 %%{init: {
   'theme': 'base',
@@ -57,7 +55,7 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '13px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
@@ -65,8 +63,7 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
     'rankSpacing': 100,
     'padding': 20,
     'useMaxWidth': true,
-    'htmlLabels': true,
-    'width': '100%'
+    'htmlLabels': true
   }
 }}%%
 
@@ -107,8 +104,6 @@ graph TD
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
-</div>
-
 So why does this pairwise approach actually work better? Let me dive into it.
 
 ## Why Pairwise Beats Pointwise Every Time
@@ -136,8 +131,6 @@ The whole pipeline flows like this:
 
 and then LightGBM builds trees using those gradients and hessians to learn better ranking scores.
 
-<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
-
 <div class="mermaid">
 %%{init: {
   'theme': 'base',
@@ -146,7 +139,7 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '13px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
@@ -154,8 +147,7 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
     'rankSpacing': 100,
     'padding': 20,
     'useMaxWidth': true,
-    'htmlLabels': true,
-    'width': '100%'
+    'htmlLabels': true
   }
 }}%%
 
@@ -177,8 +169,6 @@ flowchart LR
 </div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
-
-</div>
 
 Notice how it's a straight shot from query to final ranking, with each step feeding into the next.
 
@@ -235,8 +225,6 @@ Choosing those weights is an art form. Set $\alpha$ too high and you get super-r
 
 This is where **Pareto optimization** comes in. Instead of picking one magic combination of weights, you **train multiple models** with different weight configurations and look at the Pareto frontier—the set of solutions where you can't improve one objective without hurting another.
 
-<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
-
 <div class="mermaid">
 %%{init: {
   'theme': 'base',
@@ -245,7 +233,7 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '13px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
@@ -253,8 +241,7 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
     'rankSpacing': 100,
     'padding': 20,
     'useMaxWidth': true,
-    'htmlLabels': true,
-    'width': '100%'
+    'htmlLabels': true
   }
 }}%%
 
@@ -305,8 +292,6 @@ graph LR
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
-</div>
-
 In the process shown above, you're essentially exploring the spectrum from pure accuracy (α=1.0) to balanced diversity (lower α values).
 
 And the cool part? Because LightGBM's pairwise ranking is so fast (we're talking seconds to minutes even on large datasets), you can actually explore this Pareto frontier without waiting days for training.
@@ -347,8 +332,6 @@ This is why LightGBM converges faster than algorithms that only use first-order 
 
 The split decision process groups items by their gradients and Hessians, tries different splits (like "price < $50"), calculates the gain using both gradient and Hessian information, and keeps the split if the gain is high enough.
 
-<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
-
 <div class="mermaid">
 %%{init: {
   'theme': 'base',
@@ -357,7 +340,7 @@ The split decision process groups items by their gradients and Hessians, tries d
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '13px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
@@ -365,8 +348,7 @@ The split decision process groups items by their gradients and Hessians, tries d
     'rankSpacing': 100,
     'padding': 20,
     'useMaxWidth': true,
-    'htmlLabels': true,
-    'width': '100%'
+    'htmlLabels': true
   }
 }}%%
 
@@ -409,8 +391,6 @@ graph LR
 </div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
-
-</div>
 
 Notice how the Hessian appears in the denominator of the gain formula, making the algorithm more conservative when the loss landscape has high curvature.
 
