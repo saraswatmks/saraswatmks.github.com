@@ -51,19 +51,18 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#2C5282',
-    'primaryTextColor': '#FFFFFF',
-    'primaryBorderColor': '#1A365D',
-    'lineColor': '#718096',
-    'secondaryColor': '#744210',
-    'tertiaryColor': '#0891B2',
+    'primaryColor': '#E5E7EB',
+    'primaryTextColor': '#1F2937',
+    'primaryBorderColor': '#9CA3AF',
+    'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif'
+    'fontFamily': 'system-ui, -apple-system, sans-serif',
+    'background': '#F3F4F6'
   }
 }}%%
 
 graph TD
-    subgraph Pointwise["❌ Pointwise (Treats items independently)"]
+    subgraph Pointwise["<b>Pointwise</b> (Treats items independently)"]
         P1[Restaurant A<br/>Predict: 4.2 stars]
         P2[Restaurant B<br/>Predict: 4.1 stars]
         P3[Restaurant C<br/>Predict: 3.9 stars]
@@ -73,29 +72,28 @@ graph TD
         P_SORT --> P_RESULT[Ranking: A, B, C<br/>May be wrong if<br/>predictions biased]
     end
 
-    subgraph Pairwise["✅ Pairwise (Compares pairs)"]
-        Q1[A vs B:<br/>Is A > B? ✓]
-        Q2[A vs C:<br/>Is A > C? ✓]
-        Q3[B vs C:<br/>Is B > C? ✓]
+    subgraph Pairwise["<b>Pairwise</b> (Compares pairs)"]
+        Q1[A vs B:<br/>Is A > B?]
+        Q2[A vs C:<br/>Is A > C?]
+        Q3[B vs C:<br/>Is B > C?]
         Q1 --> Q_LEARN[Learn to order<br/>pairs correctly]
         Q2 --> Q_LEARN
         Q3 --> Q_LEARN
         Q_LEARN --> Q_RESULT[Ranking: A, B, C<br/>Optimizes relative<br/>order directly]
     end
 
-    WM(["© FloatingBytes | saraswatmks.github.io"])
-
-    style P1 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style P2 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style P3 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style P_SORT fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style P_RESULT fill:#742A2A,stroke:#63171B,stroke-width:2px,color:#FFFFFF
-    style Q1 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style Q2 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style Q3 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style Q_LEARN fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style Q_RESULT fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
-    style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
+    style P1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P_SORT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P_RESULT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q_LEARN fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q_RESULT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Pointwise fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Pairwise fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
 
 ```
 
@@ -130,35 +128,31 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#2C5282',
-    'primaryTextColor': '#FFFFFF',
-    'primaryBorderColor': '#1A365D',
-    'lineColor': '#718096',
-    'secondaryColor': '#744210',
-    'tertiaryColor': '#0891B2',
+    'primaryColor': '#E5E7EB',
+    'primaryTextColor': '#1F2937',
+    'primaryBorderColor': '#9CA3AF',
+    'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif'
+    'fontFamily': 'system-ui, -apple-system, sans-serif',
+    'background': '#F3F4F6'
   }
 }}%%
 
 flowchart LR
-    A[Query:<br/>best pizza] --> B[Pairs:<br/>A vs B, A vs C...]
-    B --> C[λ = -σ/<br/>1+exp∆s]
-    C --> D[Weight by<br/>∆NDCG]
-    D --> E[Calc<br/>Hessian]
-    E --> F[Build tree:<br/>G²/H+λ]
-    F --> G[Score &<br/>rank]
+    A[<b>Query</b><br/>best pizza] --> B[<b>Pairs</b><br/>A vs B, A vs C...]
+    B --> C[<b>Lambda</b><br/>λ = -σ/1+exp∆s]
+    C --> D[<b>Weight</b><br/>by ∆NDCG]
+    D --> E[<b>Calc</b><br/>Hessian]
+    E --> F[<b>Build tree</b><br/>G²/H+λ]
+    F --> G[<b>Score &</b><br/>rank]
 
-    WM(["© FloatingBytes | saraswatmks.github.io"])
-
-    style A fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style B fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style C fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style D fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style E fill:#553C9A,stroke:#44337A,stroke-width:2px,color:#FFFFFF
-    style F fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style G fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
-    style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
+    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style G fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
 
 ```
 
@@ -221,34 +215,33 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#2C5282',
-    'primaryTextColor': '#FFFFFF',
-    'primaryBorderColor': '#1A365D',
-    'lineColor': '#718096',
-    'secondaryColor': '#744210',
-    'tertiaryColor': '#0891B2',
+    'primaryColor': '#E5E7EB',
+    'primaryTextColor': '#1F2937',
+    'primaryBorderColor': '#9CA3AF',
+    'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif'
+    'fontFamily': 'system-ui, -apple-system, sans-serif',
+    'background': '#F3F4F6'
   }
 }}%%
 
 graph LR
-    subgraph Objectives["Two Competing Objectives"]
+    subgraph Objectives["<b>Two Competing Objectives</b>"]
         A[NDCG:<br/>Ranking<br/>accuracy]
         B[Diversity:<br/>Result<br/>variety]
     end
 
-    subgraph Loss["Combined Loss Function"]
+    subgraph Loss["<b>Combined Loss Function</b>"]
         C["L = α·NDCG_loss + 1-α·Diversity_loss"]
     end
 
-    subgraph Models["Train Multiple Models"]
+    subgraph Models["<b>Train Multiple Models</b>"]
         D1[α=1.0:<br/>Pure NDCG]
         D2[α=0.7:<br/>Balanced]
         D3[α=0.3:<br/>More diversity]
     end
 
-    subgraph Pareto["Pick Best Tradeoff"]
+    subgraph Pareto["<b>Pick Best Tradeoff</b>"]
         E[Evaluate on<br/>real metrics]
         F[Choose α that<br/>fits product goals]
     end
@@ -263,17 +256,18 @@ graph LR
     D3 --> E
     E --> F
 
-    WM(["© FloatingBytes | saraswatmks.github.io"])
-
-    style A fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style B fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style C fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style D1 fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style D2 fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style D3 fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style E fill:#285E61,stroke:#1D4044,stroke-width:2px,color:#FFFFFF
-    style F fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
-    style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
+    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Objectives fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Loss fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Models fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Pareto fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
 ```
 
 In the process shown above, you're essentially exploring the spectrum from pure accuracy (α=1.0) to balanced diversity (lower α values).
@@ -320,29 +314,28 @@ The split decision process groups items by their gradients and Hessians, tries d
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#2C5282',
-    'primaryTextColor': '#FFFFFF',
-    'primaryBorderColor': '#1A365D',
-    'lineColor': '#718096',
-    'secondaryColor': '#744210',
-    'tertiaryColor': '#0891B2',
+    'primaryColor': '#E5E7EB',
+    'primaryTextColor': '#1F2937',
+    'primaryBorderColor': '#9CA3AF',
+    'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif'
+    'fontFamily': 'system-ui, -apple-system, sans-serif',
+    'background': '#F3F4F6'
   }
 }}%%
 
 graph LR
-    subgraph Input["Input to Split"]
+    subgraph Input["<b>Input to Split</b>"]
         A[Items with<br/>gradients G]
         B[Items with<br/>Hessians H]
     end
 
-    subgraph Split["Try Split: price < $50"]
+    subgraph Split["<b>Try Split: price < $50</b>"]
         C[Left: G_L, H_L]
         D[Right: G_R, H_R]
     end
 
-    subgraph Gain["Calculate Gain"]
+    subgraph Gain["<b>Calculate Gain</b>"]
         E["Gain = ½(G_L²/H_L + G_R²/H_R - G_total²/H_total)"]
     end
 
@@ -356,17 +349,17 @@ graph LR
     F -->|Yes| G[Keep split]
     F -->|No| H[Try different<br/>feature]
 
-    WM(["© FloatingBytes | saraswatmks.github.io"])
-
-    style A fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
-    style B fill:#553C9A,stroke:#44337A,stroke-width:2px,color:#FFFFFF
-    style C fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style D fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style E fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style F fill:#285E61,stroke:#1D4044,stroke-width:2px,color:#FFFFFF
-    style G fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
-    style H fill:#742A2A,stroke:#63171B,stroke-width:2px,color:#FFFFFF
-    style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
+    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style G fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style H fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Input fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Split fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style Gain fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
 
 ```
 
