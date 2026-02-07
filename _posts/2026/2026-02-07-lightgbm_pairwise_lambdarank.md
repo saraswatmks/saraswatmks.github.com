@@ -57,14 +57,16 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '13px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
-    'nodeSpacing': 50,
-    'rankSpacing': 80,
-    'padding': 15,
-    'useMaxWidth': true
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true,
+    'width': '100%'
   }
 }}%%
 
@@ -144,14 +146,16 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '13px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
-    'nodeSpacing': 50,
-    'rankSpacing': 80,
-    'padding': 15,
-    'useMaxWidth': true
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true,
+    'width': '100%'
   }
 }}%%
 
@@ -241,14 +245,16 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '13px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
-    'nodeSpacing': 50,
-    'rankSpacing': 80,
-    'padding': 15,
-    'useMaxWidth': true
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true,
+    'width': '100%'
   }
 }}%%
 
@@ -351,14 +357,16 @@ The split decision process groups items by their gradients and Hessians, tries d
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '13px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   },
   'flowchart': {
-    'nodeSpacing': 50,
-    'rankSpacing': 80,
-    'padding': 15,
-    'useMaxWidth': true
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true,
+    'width': '100%'
   }
 }}%%
 

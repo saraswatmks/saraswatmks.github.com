@@ -61,6 +61,42 @@
   // Initialize Mermaid
   mermaid.initialize({
     startOnLoad: true,
-    theme: 'base'
+    theme: 'base',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis'
+    }
   });
 </script>
+
+<style>
+  /* Force Mermaid nodes to have adequate width and padding */
+  .mermaid .node rect,
+  .mermaid .node circle,
+  .mermaid .node ellipse,
+  .mermaid .node polygon {
+    rx: 5px;
+    ry: 5px;
+  }
+
+  .mermaid .node .label {
+    padding: 10px 20px !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+  }
+
+  /* Ensure proper text wrapping and spacing */
+  .mermaid .edgeLabel {
+    background-color: transparent !important;
+  }
+
+  /* Add minimum width to prevent text cutoff */
+  .mermaid .node > rect {
+    min-width: 150px;
+  }
+
+  /* Improve cluster/subgraph spacing */
+  .mermaid .cluster rect {
+    padding: 20px !important;
+  }
+</style>
