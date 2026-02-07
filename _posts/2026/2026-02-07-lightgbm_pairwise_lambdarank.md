@@ -56,7 +56,7 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
     'primaryBorderColor': '#1A365D',
     'lineColor': '#718096',
     'secondaryColor': '#744210',
-    'tertiaryColor': '#276749',
+    'tertiaryColor': '#0891B2',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
@@ -94,7 +94,7 @@ graph TD
     style Q2 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
     style Q3 fill:#2C5282,stroke:#1A365D,stroke-width:2px,color:#FFFFFF
     style Q_LEARN fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style Q_RESULT fill:#276749,stroke:#1C4532,stroke-width:2px,color:#FFFFFF
+    style Q_RESULT fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
     style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
 
 ```
@@ -135,7 +135,7 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
     'primaryBorderColor': '#1A365D',
     'lineColor': '#718096',
     'secondaryColor': '#744210',
-    'tertiaryColor': '#276749',
+    'tertiaryColor': '#0891B2',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
@@ -157,7 +157,7 @@ flowchart LR
     style D fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
     style E fill:#553C9A,stroke:#44337A,stroke-width:2px,color:#FFFFFF
     style F fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
-    style G fill:#276749,stroke:#1C4532,stroke-width:2px,color:#FFFFFF
+    style G fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
     style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
 
 ```
@@ -182,7 +182,7 @@ The first part—that fraction with the exponential is basically a **sigmoid fun
 
 But if $s_i$ is lower than $s_j$, that denominator gets small, and lambda gets large. Translation: "You got this pair backwards, here's a big gradient to fix it."
 
-The second part—$|\Delta \text{NDCG}_{ij}|$ is where LambdaRank gets clever. 
+The second part—$\|\Delta \text{NDCG}_{ij}\|$—is where LambdaRank gets clever. 
 
 **NDCG (Normalized Discounted Cumulative Gain)** is a ranking metric that cares more about getting the top results right than the bottom ones. By weighting the lambda gradient by how much swapping items $i$ and $j$ would change NDCG, you make the algorithm focus on the pairs that actually matter for ranking quality.
 
@@ -226,7 +226,7 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
     'primaryBorderColor': '#1A365D',
     'lineColor': '#718096',
     'secondaryColor': '#744210',
-    'tertiaryColor': '#276749',
+    'tertiaryColor': '#0891B2',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
@@ -272,7 +272,7 @@ graph LR
     style D2 fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
     style D3 fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
     style E fill:#285E61,stroke:#1D4044,stroke-width:2px,color:#FFFFFF
-    style F fill:#276749,stroke:#1C4532,stroke-width:2px,color:#FFFFFF
+    style F fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
     style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
 ```
 
@@ -325,7 +325,7 @@ The split decision process groups items by their gradients and Hessians, tries d
     'primaryBorderColor': '#1A365D',
     'lineColor': '#718096',
     'secondaryColor': '#744210',
-    'tertiaryColor': '#276749',
+    'tertiaryColor': '#0891B2',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
@@ -364,7 +364,7 @@ graph LR
     style D fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
     style E fill:#744210,stroke:#5F370E,stroke-width:2px,color:#FFFFFF
     style F fill:#285E61,stroke:#1D4044,stroke-width:2px,color:#FFFFFF
-    style G fill:#276749,stroke:#1C4532,stroke-width:2px,color:#FFFFFF
+    style G fill:#0891B2,stroke:#0E7490,stroke-width:2px,color:#FFFFFF
     style H fill:#742A2A,stroke:#63171B,stroke-width:2px,color:#FFFFFF
     style WM fill:#4A5568,stroke:#2D3748,stroke-width:2px,color:#FFFFFF,font-size:11px
 
