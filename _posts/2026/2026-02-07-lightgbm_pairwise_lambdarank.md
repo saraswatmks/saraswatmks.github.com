@@ -59,28 +59,34 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
     'lineColor': '#6B7280',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 50,
+    'rankSpacing': 80,
+    'padding': 15,
+    'useMaxWidth': true
   }
 }}%%
 
 graph TD
-    subgraph Pointwise["Pointwise (Treats items independently)"]
-        P1[Restaurant A<br/>Predict: 4.2 stars]
-        P2[Restaurant B<br/>Predict: 4.1 stars]
-        P3[Restaurant C<br/>Predict: 3.9 stars]
-        P1 -.-> P_SORT[Sort by<br/>predicted scores]
+    subgraph Pointwise["Pointwise - Treats items independently"]
+        P1["Restaurant A<br/>Predict: 4.2 stars"]
+        P2["Restaurant B<br/>Predict: 4.1 stars"]
+        P3["Restaurant C<br/>Predict: 3.9 stars"]
+        P1 -.-> P_SORT["Sort by<br/>predicted scores"]
         P2 -.-> P_SORT
         P3 -.-> P_SORT
-        P_SORT --> P_RESULT[Ranking: A, B, C<br/>May be wrong if<br/>predictions biased]
+        P_SORT --> P_RESULT["Ranking: A, B, C<br/>May be wrong if<br/>predictions biased"]
     end
 
-    subgraph Pairwise["Pairwise (Compares pairs)"]
-        Q1[A vs B:<br/>Is A > B?]
-        Q2[A vs C:<br/>Is A > C?]
-        Q3[B vs C:<br/>Is B > C?]
-        Q1 --> Q_LEARN[Learn to order<br/>pairs correctly]
+    subgraph Pairwise["Pairwise - Compares pairs"]
+        Q1["A vs B:<br/>Is A > B?"]
+        Q2["A vs C:<br/>Is A > C?"]
+        Q3["B vs C:<br/>Is B > C?"]
+        Q1 --> Q_LEARN["Learn to order<br/>pairs correctly"]
         Q2 --> Q_LEARN
         Q3 --> Q_LEARN
-        Q_LEARN --> Q_RESULT[Ranking: A, B, C<br/>Optimizes relative<br/>order directly]
+        Q_LEARN --> Q_RESULT["Ranking: A, B, C<br/>Optimizes relative<br/>order directly"]
     end
 
     style P1 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
@@ -140,16 +146,22 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
     'lineColor': '#6B7280',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 50,
+    'rankSpacing': 80,
+    'padding': 15,
+    'useMaxWidth': true
   }
 }}%%
 
 flowchart LR
-    A[Query:<br/>best pizza] --> B[Pairs:<br/>A vs B, A vs C...]
-    B --> C[Lambda:<br/>λ = -σ/1+exp∆s]
-    C --> D[Weight<br/>by ∆NDCG]
-    D --> E[Calc<br/>Hessian]
-    E --> F[Build tree:<br/>G²/H+λ]
-    F --> G[Score &<br/>rank]
+    A["Query:<br/>best pizza"] --> B["Pairs:<br/>A vs B, A vs C..."]
+    B --> C["Lambda:<br/>λ = -σ/1+exp∆s"]
+    C --> D["Weight<br/>by ∆NDCG"]
+    D --> E["Calc<br/>Hessian"]
+    E --> F["Build tree:<br/>G²/H+λ"]
+    F --> G["Score &<br/>rank"]
 
     style A fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
@@ -231,28 +243,34 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
     'lineColor': '#6B7280',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 50,
+    'rankSpacing': 80,
+    'padding': 15,
+    'useMaxWidth': true
   }
 }}%%
 
 graph LR
     subgraph Objectives["Two Competing Objectives"]
-        A[NDCG:<br/>Ranking<br/>accuracy]
-        B[Diversity:<br/>Result<br/>variety]
+        A["NDCG:<br/>Ranking<br/>accuracy"]
+        B["Diversity:<br/>Result<br/>variety"]
     end
 
     subgraph Loss["Combined Loss Function"]
-        C["L = α·NDCG_loss + 1-α·Diversity_loss"]
+        C["L = α·NDCG_loss<br/>+ 1-α·Diversity_loss"]
     end
 
     subgraph Models["Train Multiple Models"]
-        D1[α=1.0:<br/>Pure NDCG]
-        D2[α=0.7:<br/>Balanced]
-        D3[α=0.3:<br/>More diversity]
+        D1["α=1.0:<br/>Pure NDCG"]
+        D2["α=0.7:<br/>Balanced"]
+        D3["α=0.3:<br/>More diversity"]
     end
 
     subgraph Pareto["Pick Best Tradeoff"]
-        E[Evaluate on<br/>real metrics]
-        F[Choose α that<br/>fits product goals]
+        E["Evaluate on<br/>real metrics"]
+        F["Choose α that<br/>fits product goals"]
     end
 
     A --> C
@@ -335,22 +353,28 @@ The split decision process groups items by their gradients and Hessians, tries d
     'lineColor': '#6B7280',
     'fontSize': '14px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 50,
+    'rankSpacing': 80,
+    'padding': 15,
+    'useMaxWidth': true
   }
 }}%%
 
 graph LR
     subgraph Input["Input to Split"]
-        A[Items with<br/>gradients G]
-        B[Items with<br/>Hessians H]
+        A["Items with<br/>gradients G"]
+        B["Items with<br/>Hessians H"]
     end
 
     subgraph Split["Try Split: price < $50"]
-        C[Left: G_L, H_L]
-        D[Right: G_R, H_R]
+        C["Left: G_L, H_L"]
+        D["Right: G_R, H_R"]
     end
 
     subgraph Gain["Calculate Gain"]
-        E["Gain = ½(G_L²/H_L + G_R²/H_R - G_total²/H_total)"]
+        E["Gain = ½ * G_L²/H_L<br/>+ G_R²/H_R<br/>- G_total²/H_total"]
     end
 
     A --> C
@@ -359,9 +383,9 @@ graph LR
     B --> D
     C --> E
     D --> E
-    E --> F{High<br/>gain?}
-    F -->|Yes| G[Keep split]
-    F -->|No| H[Try different<br/>feature]
+    E --> F{"High<br/>gain?"}
+    F -->|Yes| G["Keep split"]
+    F -->|No| H["Try different<br/>feature"]
 
     style A fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
