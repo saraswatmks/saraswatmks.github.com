@@ -56,10 +56,35 @@
 </script>
 
 <!-- Mermaid support -->
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  // Initialize Mermaid
   mermaid.initialize({
-    startOnLoad: true,
+    startOnLoad: false,
     theme: 'base'
+  });
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Find all code blocks with language-mermaid class
+    const mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+
+    mermaidBlocks.forEach((block, index) => {
+      // Get the mermaid code
+      const code = block.textContent;
+
+      // Create a new div to hold the rendered diagram
+      const mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = code;
+
+      // Replace the pre/code block with the mermaid div
+      block.parentElement.replaceWith(mermaidDiv);
+    });
+
+    // Render all mermaid diagrams
+    mermaid.run({
+      querySelector: '.mermaid'
+    });
   });
 </script>
