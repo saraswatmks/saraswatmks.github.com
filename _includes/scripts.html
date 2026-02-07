@@ -60,31 +60,7 @@
 <script>
   // Initialize Mermaid
   mermaid.initialize({
-    startOnLoad: false,
+    startOnLoad: true,
     theme: 'base'
-  });
-
-  // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', function() {
-    // Find all code blocks with language-mermaid class
-    const mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
-
-    mermaidBlocks.forEach((block, index) => {
-      // Get the mermaid code
-      const code = block.textContent;
-
-      // Create a new div to hold the rendered diagram
-      const mermaidDiv = document.createElement('div');
-      mermaidDiv.className = 'mermaid';
-      mermaidDiv.textContent = code;
-
-      // Replace the pre/code block with the mermaid div
-      block.parentElement.replaceWith(mermaidDiv);
-    });
-
-    // Render all mermaid diagrams
-    mermaid.run({
-      querySelector: '.mermaid'
-    });
   });
 </script>

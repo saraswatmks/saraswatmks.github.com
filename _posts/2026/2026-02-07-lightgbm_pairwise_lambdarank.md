@@ -49,7 +49,7 @@ This is what LightGBM's pairwise ranking objectives do. And it turns out this se
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -95,8 +95,7 @@ graph TD
     style Q_RESULT fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style Pointwise fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
     style Pairwise fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
-
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -131,7 +130,7 @@ and then LightGBM builds trees using those gradients and hessians to learn bette
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -159,8 +158,7 @@ flowchart LR
     style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style G fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -223,7 +221,7 @@ This is where **Pareto optimization** comes in. Instead of picking one magic com
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -279,7 +277,7 @@ graph LR
     style Loss fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
     style Models fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
     style Pareto fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -327,7 +325,7 @@ The split decision process groups items by their gradients and Hessians, tries d
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -376,8 +374,7 @@ graph LR
     style Input fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
     style Split fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
     style Gain fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
-
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
