@@ -45,24 +45,25 @@ And that's where **pairwise ranking** enters the chat.
 
 Instead of training your model to predict "Restaurant A is 4.2 stars" and "Restaurant B is 4.1 stars," you train it to answer a much simpler question: "Between A and B, which should rank higher?"
 
-This is what LightGBM's pairwise ranking objectives do. And it turns out this seemingly small shift changes everything as shown below: 
+This is what LightGBM's pairwise ranking objectives do. And it turns out this seemingly small shift changes everything as shown below:
+
+<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
 ```mermaid
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#E5E7EB',
+    'primaryColor': '#FFFFFF',
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif',
-    'background': '#F3F4F6'
+    'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
 }}%%
 
 graph TD
-    subgraph Pointwise["<b>Pointwise</b> (Treats items independently)"]
+    subgraph Pointwise["Pointwise (Treats items independently)"]
         P1[Restaurant A<br/>Predict: 4.2 stars]
         P2[Restaurant B<br/>Predict: 4.1 stars]
         P3[Restaurant C<br/>Predict: 3.9 stars]
@@ -72,7 +73,7 @@ graph TD
         P_SORT --> P_RESULT[Ranking: A, B, C<br/>May be wrong if<br/>predictions biased]
     end
 
-    subgraph Pairwise["<b>Pairwise</b> (Compares pairs)"]
+    subgraph Pairwise["Pairwise (Compares pairs)"]
         Q1[A vs B:<br/>Is A > B?]
         Q2[A vs C:<br/>Is A > C?]
         Q3[B vs C:<br/>Is B > C?]
@@ -82,20 +83,24 @@ graph TD
         Q_LEARN --> Q_RESULT[Ranking: A, B, C<br/>Optimizes relative<br/>order directly]
     end
 
-    style P1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style P2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style P3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style P_SORT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style P_RESULT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Q1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Q2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Q3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Q_LEARN fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Q_RESULT fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Pointwise fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Pairwise fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style P1 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P2 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P3 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P_SORT fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style P_RESULT fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q1 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q2 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q3 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q_LEARN fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Q_RESULT fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Pointwise fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Pairwise fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
 
 ```
+
+<div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
+
+</div>
 
 So why does this pairwise approach actually work better? Let me dive into it.
 
@@ -122,39 +127,44 @@ The whole pipeline flows like this:
 - Compute lambda gradients for each pair (weighted by NDCG impact)
 - Calculate Hessians for curvature information
 
-and then LightGBM builds trees using those gradients and hessians to learn better ranking scores. [See diagram: lightgbm-pairwise-ranking-flow.mmd]
+and then LightGBM builds trees using those gradients and hessians to learn better ranking scores.
+
+<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
 ```mermaid
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#E5E7EB',
+    'primaryColor': '#FFFFFF',
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif',
-    'background': '#F3F4F6'
+    'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
 }}%%
 
 flowchart LR
-    A[<b>Query</b><br/>best pizza] --> B[<b>Pairs</b><br/>A vs B, A vs C...]
-    B --> C[<b>Lambda</b><br/>λ = -σ/1+exp∆s]
-    C --> D[<b>Weight</b><br/>by ∆NDCG]
-    D --> E[<b>Calc</b><br/>Hessian]
-    E --> F[<b>Build tree</b><br/>G²/H+λ]
-    F --> G[<b>Score &</b><br/>rank]
+    A[Query:<br/>best pizza] --> B[Pairs:<br/>A vs B, A vs C...]
+    B --> C[Lambda:<br/>λ = -σ/1+exp∆s]
+    C --> D[Weight<br/>by ∆NDCG]
+    D --> E[Calc<br/>Hessian]
+    E --> F[Build tree:<br/>G²/H+λ]
+    F --> G[Score &<br/>rank]
 
-    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style D fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style G fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style A fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style G fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
 
 ```
+
+<div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
+
+</div>
 
 Notice how it's a straight shot from query to final ranking, with each step feeding into the next.
 
@@ -209,39 +219,40 @@ You pick weights ($\alpha$, $\beta$, $\gamma$) that reflect your priorities, and
 
 Choosing those weights is an art form. Set $\alpha$ too high and you get super-relevant results that are all the same. Set $\beta$ too high and you get diverse garbage.
 
-This is where **Pareto optimization** comes in. Instead of picking one magic combination of weights, you **train multiple models** with different weight configurations and look at the Pareto frontier—the set of solutions where you can't improve one objective without hurting another. 
+This is where **Pareto optimization** comes in. Instead of picking one magic combination of weights, you **train multiple models** with different weight configurations and look at the Pareto frontier—the set of solutions where you can't improve one objective without hurting another.
+
+<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
 ```mermaid
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#E5E7EB',
+    'primaryColor': '#FFFFFF',
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif',
-    'background': '#F3F4F6'
+    'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
 }}%%
 
 graph LR
-    subgraph Objectives["<b>Two Competing Objectives</b>"]
+    subgraph Objectives["Two Competing Objectives"]
         A[NDCG:<br/>Ranking<br/>accuracy]
         B[Diversity:<br/>Result<br/>variety]
     end
 
-    subgraph Loss["<b>Combined Loss Function</b>"]
+    subgraph Loss["Combined Loss Function"]
         C["L = α·NDCG_loss + 1-α·Diversity_loss"]
     end
 
-    subgraph Models["<b>Train Multiple Models</b>"]
+    subgraph Models["Train Multiple Models"]
         D1[α=1.0:<br/>Pure NDCG]
         D2[α=0.7:<br/>Balanced]
         D3[α=0.3:<br/>More diversity]
     end
 
-    subgraph Pareto["<b>Pick Best Tradeoff</b>"]
+    subgraph Pareto["Pick Best Tradeoff"]
         E[Evaluate on<br/>real metrics]
         F[Choose α that<br/>fits product goals]
     end
@@ -256,19 +267,23 @@ graph LR
     D3 --> E
     E --> F
 
-    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style D1 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style D2 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style D3 fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Objectives fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Loss fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Models fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Pareto fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style A fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D1 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D2 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D3 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Objectives fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Loss fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Models fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Pareto fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
 ```
+
+<div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
+
+</div>
 
 In the process shown above, you're essentially exploring the spectrum from pure accuracy (α=1.0) to balanced diversity (lower α values).
 
@@ -308,34 +323,35 @@ Notice how the Hessian appears in the denominator? That's what makes this second
 
 This is why LightGBM converges faster than algorithms that only use first-order gradients. It's literally using more information about the loss landscape to make smarter split decisions.
 
-The split decision process groups items by their gradients and Hessians, tries different splits (like "price < $50"), calculates the gain using both gradient and Hessian information, and keeps the split if the gain is high enough. [See diagram: lightgbm-hessian-tree-splitting.mmd]
+The split decision process groups items by their gradients and Hessians, tries different splits (like "price < $50"), calculates the gain using both gradient and Hessian information, and keeps the split if the gain is high enough.
+
+<div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
 ```mermaid
 %%{init: {
   'theme': 'base',
   'themeVariables': {
-    'primaryColor': '#E5E7EB',
+    'primaryColor': '#FFFFFF',
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
     'fontSize': '14px',
-    'fontFamily': 'system-ui, -apple-system, sans-serif',
-    'background': '#F3F4F6'
+    'fontFamily': 'system-ui, -apple-system, sans-serif'
   }
 }}%%
 
 graph LR
-    subgraph Input["<b>Input to Split</b>"]
+    subgraph Input["Input to Split"]
         A[Items with<br/>gradients G]
         B[Items with<br/>Hessians H]
     end
 
-    subgraph Split["<b>Try Split: price < $50</b>"]
+    subgraph Split["Try Split: price < $50"]
         C[Left: G_L, H_L]
         D[Right: G_R, H_R]
     end
 
-    subgraph Gain["<b>Calculate Gain</b>"]
+    subgraph Gain["Calculate Gain"]
         E["Gain = ½(G_L²/H_L + G_R²/H_R - G_total²/H_total)"]
     end
 
@@ -349,19 +365,23 @@ graph LR
     F -->|Yes| G[Keep split]
     F -->|No| H[Try different<br/>feature]
 
-    style A fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style B fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style C fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style D fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style E fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style F fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style G fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style H fill:#E5E7EB,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-    style Input fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Split fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
-    style Gain fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px
+    style A fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style C fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style D fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style G fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style H fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
+    style Input fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Split fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
+    style Gain fill:#F3F4F6,stroke:#9CA3AF,stroke-width:2px
 
 ```
+
+<div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
+
+</div>
 
 Notice how the Hessian appears in the denominator of the gain formula, making the algorithm more conservative when the loss landscape has high curvature.
 
