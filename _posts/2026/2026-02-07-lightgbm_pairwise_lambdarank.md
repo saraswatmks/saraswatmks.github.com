@@ -15,7 +15,7 @@ header:
 
 So here's a question that probably seems obvious at first: if you're building a search engine or a recommendation system, shouldn't you just predict how good each result is and sort by that score?
 
-That's what everyone thinks. And it's wrong. Not like "technically wrong but works okay" wrong—like fundamentally missing the entire point wrong.
+That's what everyone thinks. And it's wrong. Not like "technically wrong but works okay" wrong, like fundamentally missing the entire point wrong.
 
 Here's the thing: ranking isn't about predicting absolute scores. It's about predicting relative order. 
 
@@ -33,7 +33,8 @@ Here's the thing: ranking isn't about predicting absolute scores. It's about pre
 
 Let's say you're building a search engine. Someone searches for "best pizza near me" and you have five restaurants to rank. The obvious approach called pointwise ranking goes like this: 
 
-- train a model to predict a relevance score for each restaurant (maybe 0 to 5 stars), - then sort by those predictions.
+- train a model to predict a relevance score for each restaurant (maybe 0 to 5 stars)
+- then sort by those predictions.
 
 Seems reasonable! Train a regression model, predict ratings, sort, done.
 
