@@ -22,7 +22,7 @@ header:
   overlay_filter: 0.5
 toc: true
 toc_sticky: true
-toc_levels: "1"
+toc_levels: 1..1
 classes: wide
 # SEO optimization
 seo_title: "Complete Guide to SFT + DPO Fine-tuning with Axolotl | Floating Bytes"
@@ -31,9 +31,7 @@ keywords: "deep-learning, llm, fine-tuning, sft, dpo, rlhf, axolotl, lora, tutor
 author: Manish Saraswat
 ---
 
-# Complete Guide to SFT + DPO Fine-tuning with Axolotl
-
-## Overview
+# Overview
 
 This notebook provides a comprehensive, production-ready guide to fine-tuning Large Language Models (LLMs) using **Supervised Fine-Tuning (SFT)** followed by **Direct Preference Optimization (DPO)** using the Axolotl framework.
 
@@ -68,7 +66,7 @@ Final Aligned Model
 
 ---
 
-## Part 1: Environment Setup
+# Part 1: Environment Setup
 
 First, we'll install Axolotl and its dependencies. Axolotl is a powerful framework that handles:
 - Data preprocessing and formatting
@@ -103,7 +101,7 @@ GPU: None
 
 ---
 
-## Part 2: Understanding the Data Formats
+# Part 2: Understanding the Data Formats
 
 ### SFT Data Format
 
@@ -173,7 +171,7 @@ DPO Dataset size: 5,000
 
 ---
 
-## Part 3: Data Preprocessing
+# Part 3: Data Preprocessing
 
 ### Why Preprocessing Matters
 
@@ -302,7 +300,7 @@ print("✓ Datasets saved to data/ directory")
 
 ---
 
-## Part 4: Supervised Fine-Tuning (SFT) Configuration
+# Part 4: Supervised Fine-Tuning (SFT) Configuration
 
 ### Understanding the SFT Config
 
@@ -427,7 +425,7 @@ Key settings:
 
 ---
 
-## Part 5: Running SFT Training
+# Part 5: Running SFT Training
 
 ### Training Process
 
@@ -513,7 +511,7 @@ print(f"Response: {response}")
 
 ---
 
-## Part 6: Direct Preference Optimization (DPO) Configuration
+# Part 6: Direct Preference Optimization (DPO) Configuration
 
 ### Understanding DPO
 
@@ -643,7 +641,7 @@ Key settings:
 
 ---
 
-## Part 7: Running DPO Training
+# Part 7: Running DPO Training
 
 ### What Happens During DPO Training
 
@@ -713,7 +711,7 @@ print("✓ DPO model merged and ready")
 
 ---
 
-## Summary and Key Takeaways
+# Summary and Key Takeaways
 
 ### What We Accomplished
 

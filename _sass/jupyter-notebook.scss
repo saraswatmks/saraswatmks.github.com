@@ -16,13 +16,14 @@
     border: 1px solid #cfcfcf;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    background-color: #ffffff;
 
     &::before {
       content: "In [ ]:";
       position: absolute;
       left: -80px;
       top: 8px;
-      font-family: monospace;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
       font-size: 12px;
       color: #303f9f;
       font-weight: bold;
@@ -35,13 +36,39 @@
       padding: 10px 12px;
       border-radius: 4px;
       overflow-x: auto;
-      // Inherit background from theme's syntax highlighting
+      background-color: #ffffff;
 
       code {
         padding: 0;
-        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+        background-color: transparent;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         font-size: 13px;
         line-height: 1.5;
+        color: #000000;
+
+        // Jupyter notebook syntax highlighting colors
+        .k, .kn, .kd, .kr { color: #008000; font-weight: bold; } // keywords (green)
+        .s, .s1, .s2, .se { color: #BA2121; } // strings (red)
+        .nf { color: #0000FF; } // function names (blue)
+        .nb { color: #008000; } // built-ins (green)
+        .nc { color: #0000FF; font-weight: bold; } // class names (blue bold)
+        .nn { color: #0000FF; font-weight: bold; } // module names (blue bold)
+        .c, .c1, .cm { color: #408080; font-style: italic; } // comments (teal italic)
+        .mi, .mf { color: #666666; } // numbers (gray)
+        .o { color: #AA22FF; font-weight: bold; } // operators (purple)
+        .ow { color: #AA22FF; font-weight: bold; } // word operators
+        .bp { color: #008000; } // built-in pseudo (green)
+        .na { color: #7D9029; } // attribute names
+        .nt { color: #008000; font-weight: bold; } // tags
+      }
+    }
+
+    // Special styling for shell/bash commands
+    &.language-bash,
+    &.language-shell {
+      pre code {
+        .nb, .nv { color: #19177C; } // built-ins and variables (dark blue)
+        .s, .s1, .s2 { color: #BA2121; } // strings (red)
       }
     }
   }
