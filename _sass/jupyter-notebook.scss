@@ -1,0 +1,328 @@
+/* Jupyter Notebook Styling */
+
+.jupyter-notebook {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+
+  /* Code cells styling - mimics Jupyter's input cells */
+  div.language-python,
+  div.language-bash,
+  div.language-shell,
+  div.language-json,
+  div.language-yaml {
+    position: relative;
+    margin: 1.5em 0;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    background-color: #f7f7f7;
+
+    &::before {
+      content: "In [ ]:";
+      position: absolute;
+      left: -80px;
+      top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #303f9f;
+      font-weight: bold;
+      width: 70px;
+      text-align: right;
+    }
+
+    pre {
+      margin: 0;
+      padding: 10px 12px;
+      background-color: #f7f7f7;
+      border-radius: 4px;
+      overflow-x: auto;
+
+      code {
+        background-color: transparent;
+        padding: 0;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* Output blocks - text output styled like Jupyter output cells */
+  > blockquote,
+  .output {
+    position: relative;
+    margin: 1.5em 0;
+    padding: 10px 12px;
+    border: 1px solid #cfcfcf;
+    border-left: 4px solid #cfcfcf;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+
+    &::before {
+      content: "Out[ ]:";
+      position: absolute;
+      left: -80px;
+      top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #d84315;
+      font-weight: bold;
+      width: 70px;
+      text-align: right;
+    }
+
+    p {
+      margin: 0.5em 0;
+      font-family: monospace;
+      font-size: 13px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    pre {
+      margin: 0;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+      font-size: 13px;
+    }
+
+    code {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+
+  /* Special styling for code output (preformatted text blocks following code) */
+  div.language-python + p strong,
+  div.language-bash + p strong {
+    display: block;
+    position: relative;
+    margin: 1.5em 0;
+    padding: 10px 12px;
+    border: 1px solid #cfcfcf;
+    border-left: 4px solid #cfcfcf;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: normal;
+
+    &::before {
+      content: "Out[ ]:";
+      position: absolute;
+      left: -80px;
+      top: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #d84315;
+      font-weight: bold;
+      width: 70px;
+      text-align: right;
+    }
+  }
+
+  /* Markdown cells styling */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    font-weight: 600;
+    color: #24292e;
+  }
+
+  h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3em;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3em;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  p {
+    margin: 1em 0;
+    line-height: 1.7;
+  }
+
+  /* Tables - Jupyter style */
+  table {
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+    max-width: 100%;
+
+    th, td {
+      padding: 8px 13px;
+      border: 1px solid #dfe2e5;
+    }
+
+    th {
+      font-weight: 600;
+      background-color: #f6f8fa;
+      text-align: left;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+
+    li {
+      margin: 0.5em 0;
+      line-height: 1.7;
+    }
+
+    ul, ol {
+      margin: 0.5em 0;
+    }
+  }
+
+  /* Inline code */
+  p code,
+  li code,
+  td code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,0.05);
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+  }
+
+  /* Horizontal rule */
+  hr {
+    border: 0;
+    border-top: 2px solid #e1e4e8;
+    margin: 2em 0;
+  }
+
+  /* Math equations (if using MathJax/KaTeX) */
+  .MathJax_Display,
+  .katex-display {
+    margin: 1.5em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Alerts/Admonitions (if using) */
+  .notice,
+  .alert {
+    margin: 1.5em 0;
+    padding: 1em;
+    border-left: 4px solid #007bff;
+    background-color: #e7f3ff;
+    border-radius: 4px;
+
+    &--warning {
+      border-left-color: #ffc107;
+      background-color: #fff8e1;
+    }
+
+    &--danger {
+      border-left-color: #dc3545;
+      background-color: #ffe6e6;
+    }
+
+    &--success {
+      border-left-color: #28a745;
+      background-color: #e8f5e9;
+    }
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .jupyter-notebook {
+    div.language-python::before,
+    div.language-bash::before,
+    div.language-shell::before,
+    div.language-json::before,
+    div.language-yaml::before,
+    blockquote::before,
+    .output::before,
+    div.language-python + p strong::before,
+    div.language-bash + p strong::before {
+      display: none;
+    }
+
+    div.language-python,
+    div.language-bash,
+    div.language-shell,
+    div.language-json,
+    div.language-yaml,
+    blockquote,
+    .output {
+      margin-left: 0;
+    }
+
+    table {
+      font-size: 12px;
+    }
+  }
+}
+
+/* Desktop - add left margin for In/Out labels */
+@media (min-width: 769px) {
+  .jupyter-notebook {
+    margin-left: 80px;
+    padding-right: 20px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .jupyter-notebook {
+    margin-left: 0;
+
+    div.language-python::before,
+    div.language-bash::before,
+    blockquote::before {
+      position: static;
+      display: inline-block;
+      margin-right: 1em;
+    }
+  }
+}

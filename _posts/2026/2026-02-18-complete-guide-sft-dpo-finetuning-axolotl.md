@@ -2,6 +2,7 @@
 title: "Complete Guide to SFT and DPO Fine-tuning with Axolotl"
 date: 2026-02-18
 last_modified_at: 2026-02-18
+layout: notebook
 categories:
   - notebooks
 tags:
