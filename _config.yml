@@ -102,9 +102,6 @@ author:
     - label: "Linkedin"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/saraswatmanish"
-    - label: "Stackoverflow"
-      icon: "fab fa-stack-overflow"
-      url: "https://stackoverflow.com/users/9299259/yolo"
 
 footer:
   links:
