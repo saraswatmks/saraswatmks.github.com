@@ -15,11 +15,11 @@ header:
 
 
 ## Table of Contents
-- [1: The Problem (Why Pretrained Models Are Like Smart Toddlers)](#1-the-problem-why-pretrained-models-are-like-smart-toddlers)
-- [2: RLHF-Teaching with Humans (The Original Method)](#2-rlhfteaching-with-humans-the-original-method)
-- [3: RLAIF-Teaching with AI Judges (The Scalable Rebellion)](#3-rlaifteaching-with-ai-judges-the-scalable-rebellion)
-- [4: RLVR-Teaching with Math (The Verifiable Dream)](#4-rlvrteaching-with-math-the-verifiable-dream)
-- [5: When to Choose Which Method](#5-when-to-choose-which-method)
+- [1. The Problem (Why Pretrained Models Are Like Smart Toddlers)](#1-the-problem-why-pretrained-models-are-like-smart-toddlers)
+- [2. RLHF: Teaching with Humans (The Original Method)](#2-rlhf-teaching-with-humans-the-original-method)
+- [3. RLAIF: Teaching with AI Judges (The Scalable Rebellion)](#3-rlaif-teaching-with-ai-judges-the-scalable-rebellion)
+- [4. RLVR: Teaching with Math (The Verifiable Dream)](#4-rlvr-teaching-with-math-the-verifiable-dream)
+- [5. When to Choose Which Method](#5-when-to-choose-which-method)
 - [Summary](#summary)
 
 
@@ -27,7 +27,7 @@ So you've trained a massive language model on the entire internet. Congratulatio
 
 Your model is incredibly smart but has the moral compass of a very educated toddler. It learned to predict text, not to distinguish helpful from harmful, truthful from deceptive, or useful from toxic. And that's a problem.
 
-## 1: The Problem (Why Pretrained Models Are Like Smart Toddlers)
+## 1. The Problem (Why Pretrained Models Are Like Smart Toddlers)
 
 Let's say you ask GPT-4 (before any safety training): How do I make my code run faster? It might give you brilliant optimization tips. Or it might tell you to "delete all your tests because they slow down execution." Both are *technically* text that could follow your prompt on the internet. Pretraining doesn't distinguish quality.
 
@@ -82,7 +82,7 @@ flowchart LR
 
 So how do we actually teach preferences? Let's start with the method that started it all.
 
-## 2: RLHF-Teaching with Humans (The Original Method)
+## 2. RLHF: Teaching with Humans (The Original Method)
 
 RLHF stands for *Reinforcement Learning from Human Feedback*, and it's the approach that powered InstructGPT (which became ChatGPT) and basically created the modern aligned language model category. Here's how it works:
 
@@ -142,7 +142,7 @@ But here's the problem, human annotation is incredibly expensive and slow. Train
 
 And what if you want to improve the model every week? Or support 50 languages? You'd need an army of annotators. Which brings us to the rebellious idea.
 
-## 3: RLAIF-Teaching with AI Judges (The Scalable Rebellion)
+## 3. RLAIF: Teaching with AI Judges (The Scalable Rebellion)
 
 What if you just asked a different AI to do it? Like, you already have GPT-5 or Claude sitting around. Why not use them as judges?
 
@@ -204,7 +204,7 @@ The cost difference is staggering. Where RLHF might cost $500K for 50,000 labels
 
 Now, lets look at the third way, what if you didn't need judges at all?
 
-## Part 4: RLVR-Teaching with Math (The Verifiable Dream)
+## 4. RLVR: Teaching with Math (The Verifiable Dream)
 
 RLVR stands for **Reinforcement Learning from Verifiable Rewards**, and it's the most elegant approach of the three when it works. The idea is simple: 
 
@@ -306,7 +306,7 @@ OpenAI used something similar to this for training their code models, models tha
 
 But the catch is obvious: this only works when you *have* automatic verification. You can't verify when subjectivity exists like: "is this response empathetic?" or "does this answer sound natural?" or "is this creative writing compelling?" For most open-ended language tasks, RLVR simply doesn't apply. That's why it's powerful but narrow.
 
-## 5: When to Choose Which Method
+## 5. When to Choose Which Method
 
 Here's a decision tree diagram which I could think of, can give a clear guidance on how to choose the optimal method:
 
