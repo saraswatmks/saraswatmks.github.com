@@ -369,7 +369,7 @@ flowchart TD
 
 You can also combine methods. Many organizations use RLHF for the initial alignment on core capabilities and safety, then use RLAIF for rapid iteration on specific skills or style preferences.
 
-The cost comparison is dramatic. Training a reward model with RLHF might cost $500K and take two months. RLAIF might cost $5K and take two weeks. RLVR might cost $1K in compute and take three days. But RLHF gets you 85-95% human agreement, RLAIF gets you 70-85%, and RLVR gives you 100% accuracy but only works on 10% of tasks.
+The cost comparison is dramatic. Training a reward model with RLHF might cost `$500K` and take two months. RLAIF might cost `$5K` and take two weeks. RLVR might cost `$1K` in compute and take three days. But RLHF gets you 85-95% human agreement, RLAIF gets you 70-85%, and RLVR gives you 100% accuracy but only works on 10% of tasks.
 
 ## Summary
 
