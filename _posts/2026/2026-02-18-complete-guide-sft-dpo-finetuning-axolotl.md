@@ -20,8 +20,6 @@ header:
   teaser: /assets/images/notebooks/sft_dpo_notebook.png
   overlay_image: /assets/images/notebooks/sft_dpo_notebook.png
   overlay_filter: 0.5
-toc: true
-toc_sticky: true
 classes: wide
 # SEO optimization
 seo_title: "Complete Guide to SFT + DPO Fine-tuning with Axolotl | Floating Bytes"

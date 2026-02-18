@@ -52,8 +52,8 @@
         // Keywords (def, class, import, from, if, for, etc.) - Green Bold
         .k, .kn, .kd, .kr, .kc { color: #008000; font-weight: bold; }
 
-        // Strings - Red
-        .s, .s1, .s2, .se, .sb, .sc { color: #BA2121; }
+        // Strings - Red (including dictionary keys in quotes)
+        .s, .s1, .s2, .se, .sb, .sc, .dl { color: #BA2121; }
 
         // Function/Method names - Blue
         .nf, .fm { color: #0000FF; }
@@ -87,6 +87,15 @@
 
         // Special names (__init__, __name__) - Dark Gray Bold
         .vm { color: #333333; font-weight: bold; }
+
+        // Punctuation (brackets, braces, parentheses, colons, commas) - Black
+        .p, .punctuation { color: #000000; }
+
+        // JSON-specific: property names (keys) - Blue
+        .property, .nt, .nx { color: #0000FF; }
+
+        // YAML/JSON keys without quotes - Blue
+        .na { color: #0000FF; }
       }
     }
 
