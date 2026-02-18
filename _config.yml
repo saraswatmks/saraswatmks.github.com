@@ -69,12 +69,6 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 include:
   - _pages
 
-# Collections
-collections:
-  notebooks:
-    output: true
-    permalink: /notebooks/:title/
-
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
@@ -144,20 +138,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _notebooks
-  - scope:
-      path: ""
-      type: notebooks
-    values:
-      layout: single
-      classes: wide
-      author_profile: true
-      comments: true
-      share: true
-      related: true
-      read_time: true
-      toc: true
-      toc_sticky: true
 
 category_archive:
   type: liquid
