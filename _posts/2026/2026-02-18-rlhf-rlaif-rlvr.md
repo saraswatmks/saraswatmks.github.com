@@ -3,7 +3,7 @@ title: "RLHF vs RLAIF vs RLVR: The Three Ways to Teach AI Models"
 date: 2026-02-07
 tags:
 - llm
-excerpt: "rlhf vs rlaif vs rlvr explained, reinforcement learning human feedback ai feedback comparison"
+excerpt: "Understanding the basics of RLHF vs RLAIF vs RLVR for AI feedback comparison"
 header:
   teaser: /assets/images/rlhf_rlaif_rlvr_blog.png
   overlay_image: /assets/images/rlhf_rlaif_rlvr_blog.png
@@ -16,9 +16,9 @@ header:
 
 ## Table of Contents
 - [1: The Problem (Why Pretrained Models Are Like Smart Toddlers)](#1-the-problem-why-pretrained-models-are-like-smart-toddlers)
-- [2: RLHF—Teaching with Humans (The Original Method)](#2-rlhfteaching-with-humans-the-original-method)
-- [3: RLAIF—Teaching with AI Judges (The Scalable Rebellion)](#3-rlaifteaching-with-ai-judges-the-scalable-rebellion)
-- [4: RLVR—Teaching with Math (The Verifiable Dream)](#4-rlvrteaching-with-math-the-verifiable-dream)
+- [2: RLHF-Teaching with Humans (The Original Method)](#2-rlhfteaching-with-humans-the-original-method)
+- [3: RLAIF-Teaching with AI Judges (The Scalable Rebellion)](#3-rlaifteaching-with-ai-judges-the-scalable-rebellion)
+- [4: RLVR-Teaching with Math (The Verifiable Dream)](#4-rlvrteaching-with-math-the-verifiable-dream)
 - [5: When to Choose Which Method](#5-when-to-choose-which-method)
 - [Summary](#summary)
 
@@ -29,7 +29,7 @@ Your model is incredibly smart but has the moral compass of a very educated todd
 
 ## 1: The Problem (Why Pretrained Models Are Like Smart Toddlers)
 
-Let's say you ask GPT-3 (before any safety training): "How do I make my code run faster?" It might give you brilliant optimization tips. Or it might tell you to "delete all your tests because they slow down execution." Both are *technically* text that could follow your prompt on the internet. Pretraining doesn't distinguish quality.
+Let's say you ask GPT-4 (before any safety training): How do I make my code run faster? It might give you brilliant optimization tips. Or it might tell you to "delete all your tests because they slow down execution." Both are *technically* text that could follow your prompt on the internet. Pretraining doesn't distinguish quality.
 
 This happens because *pretraining is basically next-token* prediction on steroids. 
 
@@ -39,7 +39,7 @@ The solution? We need to teach the model human preferences, what responses we ac
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -47,8 +47,15 @@ The solution? We need to teach the model human preferences, what responses we ac
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true
   }
 }}%%
 
@@ -67,7 +74,7 @@ flowchart LR
     style D fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -75,7 +82,7 @@ flowchart LR
 
 So how do we actually teach preferences? Let's start with the method that started it all.
 
-## 2: RLHF—Teaching with Humans (The Original Method)
+## 2: RLHF-Teaching with Humans (The Original Method)
 
 RLHF stands for *Reinforcement Learning from Human Feedback*, and it's the approach that powered InstructGPT (which became ChatGPT) and basically created the modern aligned language model category. Here's how it works:
 
@@ -135,7 +142,7 @@ But here's the problem, human annotation is incredibly expensive and slow. Train
 
 And what if you want to improve the model every week? Or support 50 languages? You'd need an army of annotators. Which brings us to the rebellious idea.
 
-## 3: RLAIF—Teaching with AI Judges (The Scalable Rebellion)
+## 3: RLAIF-Teaching with AI Judges (The Scalable Rebellion)
 
 What if you just asked a different AI to do it? Like, you already have GPT-5 or Claude sitting around. Why not use them as judges?
 
@@ -197,7 +204,7 @@ The cost difference is staggering. Where RLHF might cost $500K for 50,000 labels
 
 Now, lets look at the third way, what if you didn't need judges at all?
 
-## Part 4: RLVR—Teaching with Math (The Verifiable Dream)
+## Part 4: RLVR-Teaching with Math (The Verifiable Dream)
 
 RLVR stands for **Reinforcement Learning from Verifiable Rewards**, and it's the most elegant approach of the three when it works. The idea is simple: 
 
@@ -211,7 +218,7 @@ The RLVR training pipeline is actually simpler than RLHF or RLAIF. You don't nee
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -219,8 +226,15 @@ The RLVR training pipeline is actually simpler than RLHF or RLAIF. You don't nee
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true
   }
 }}%%
 
@@ -241,7 +255,7 @@ flowchart LR
     style E fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style F fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style G fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -298,7 +312,7 @@ Here's a decision tree diagram which I could think of, can give a clear guidance
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -306,8 +320,15 @@ Here's a decision tree diagram which I could think of, can give a clear guidance
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '14px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true
   }
 }}%%
 
@@ -340,7 +361,7 @@ flowchart TD
     style RLAIF1 fill:#FEF3C7,stroke:#F59E0B,stroke-width:3px,color:#92400E
     style RLAIF2 fill:#FEF3C7,stroke:#F59E0B,stroke-width:3px,color:#92400E
     style Hybrid fill:#E9D5FF,stroke:#A855F7,stroke-width:3px,color:#6B21A8
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
