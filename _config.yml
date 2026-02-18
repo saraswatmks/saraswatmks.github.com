@@ -42,6 +42,9 @@ google_site_verification: "aKzOYiMMl-_8MQbLQWXZL2-ZnpaFcOmZYWsju3OhXKY"
 bing_site_verification: "570DB0A17D827E22CAEE287BBFAA2B92"
 head_scripts:
   - /assets/js/ga_ads_tracking.js
+
+footer_scripts:
+  - /assets/js/copy-code.js
 # Analytics related
 # gtag: "G-KLJBFF0EQ0"
 # gtm: "GTM-M2F52F9"
