@@ -335,21 +335,21 @@ Here's a decision tree diagram which I could think of, can give a clear guidance
 flowchart TD
     Start[Which alignment method?] --> Q1{Is task<br/>verifiable?}
 
-    Q1 -->|Yes<br/>Code, math,<br/>test cases| RLVR[✓ Use RLVR<br/>Perfect accuracy<br/>Cost: $1K<br/>Time: 3 days]
+    Q1 -->|Yes<br/>Code, math,<br/>test cases| RLVR[Use RLVR<br/>Perfect accuracy<br/>Cost: 1K<br/>Time: 3 days]
 
-    Q1 -->|No<br/>Subjective,<br/>open-ended| Q2{Budget &<br/>timeline?}
+    Q1 -->|No<br/>Subjective,<br/>open-ended| Q2{Budget and<br/>timeline?}
 
-    Q2 -->|$500K-1M<br/>2-3 months| Q3{Quality<br/>critical?}
+    Q2 -->|500K-1M<br/>2-3 months| Q3{Quality<br/>critical?}
 
-    Q3 -->|Yes<br/>Safety-critical<br/>consumer product| RLHF[✓ Use RLHF<br/>85-95% quality<br/>Gold standard<br/>Slow but best]
+    Q3 -->|Yes<br/>Safety-critical<br/>consumer product| RLHF[Use RLHF<br/>85-95% quality<br/>Gold standard<br/>Slow but best]
 
-    Q3 -->|No<br/>Internal tools<br/>prototypes| RLAIF1[✓ Use RLAIF<br/>70-85% quality<br/>Fast iteration]
+    Q3 -->|No<br/>Internal tools<br/>prototypes| RLAIF1[Use RLAIF<br/>70-85% quality<br/>Fast iteration]
 
-    Q2 -->|$5K-50K<br/>1-2 weeks| Q4{Need multilingual<br/>or rapid iteration?}
+    Q2 -->|5K-50K<br/>1-2 weeks| Q4{Need multilingual<br/>or rapid iteration?}
 
-    Q4 -->|Yes| RLAIF2[✓ Use RLAIF<br/>10-100x cheaper<br/>Support 50+ langs]
+    Q4 -->|Yes| RLAIF2[Use RLAIF<br/>10-100x cheaper<br/>Support 50+ langs]
 
-    Q4 -->|No but need<br/>high quality| Hybrid[✓ Hybrid Approach<br/>RLHF for core<br/>RLAIF for iteration]
+    Q4 -->|No but need<br/>high quality| Hybrid[Hybrid Approach<br/>RLHF for core<br/>RLAIF for iteration]
 
     style Start fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style Q1 fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
