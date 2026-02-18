@@ -217,13 +217,13 @@
 
   /* Special styling for code output (code blocks after paragraphs with "Output:") */
   // Target code blocks that immediately follow a paragraph
-  p + div.language-json,
-  p + div.language-text {
+  p + div[class^="language-"],
+  p + div[class*=" language-"] {
     border-left: 4px solid #cfcfcf;
 
     &::before {
-      content: "Out[ ]:";
-      color: #d84315;
+      content: "Out[ ]:" !important;
+      color: #d84315 !important;
     }
   }
 
