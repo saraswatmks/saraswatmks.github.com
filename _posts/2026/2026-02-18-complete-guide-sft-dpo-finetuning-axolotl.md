@@ -9,12 +9,6 @@ tags:
   - deep-learning
   - llm
   - fine-tuning
-  - sft
-  - dpo
-  - rlhf
-  - axolotl
-  - lora
-  - tutorial
 excerpt: "Master the complete pipeline for fine-tuning Large Language Models using Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO) with Axolotl framework - from data preparation to production deployment"
 header:
   teaser: /assets/images/notebooks/sft_dpo_notebook.png
