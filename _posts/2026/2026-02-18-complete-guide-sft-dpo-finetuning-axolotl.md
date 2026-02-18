@@ -22,6 +22,7 @@ header:
   overlay_filter: 0.5
 toc: true
 toc_sticky: true
+toc_levels: "1"
 classes: wide
 # SEO optimization
 seo_title: "Complete Guide to SFT + DPO Fine-tuning with Axolotl | Floating Bytes"
