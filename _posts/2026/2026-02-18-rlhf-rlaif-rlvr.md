@@ -1,6 +1,6 @@
 ---
 title: "RLHF vs RLAIF vs RLVR: The Three Ways to Teach AI Models"
-date: 2026-02-07
+date: 2026-02-18
 tags:
 - llm
 excerpt: "Understanding the basics of RLHF vs RLAIF vs RLVR for AI feedback comparison"
