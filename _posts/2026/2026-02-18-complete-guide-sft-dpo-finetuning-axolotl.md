@@ -22,7 +22,6 @@ header:
   overlay_filter: 0.5
 toc: true
 toc_sticky: true
-toc_levels: 1..1
 classes: wide
 # SEO optimization
 seo_title: "Complete Guide to SFT + DPO Fine-tuning with Axolotl | Floating Bytes"
@@ -34,14 +33,6 @@ author: Manish Saraswat
 # Overview
 
 This notebook provides a comprehensive, production-ready guide to fine-tuning Large Language Models (LLMs) using **Supervised Fine-Tuning (SFT)** followed by **Direct Preference Optimization (DPO)** using the Axolotl framework.
-
-### What You'll Learn
-
-1. **Supervised Fine-Tuning (SFT)**: Adapt a base model to follow instructions using supervised data
-2. **Direct Preference Optimization (DPO)**: Align the model with human preferences without RL
-3. **Axolotl Framework**: Leverage production-grade tooling for efficient training
-4. **Memory Optimization**: Techniques like LoRA, gradient checkpointing, and mixed precision
-5. **Evaluation**: Proper metrics and benchmarking
 
 ### Why SFT → DPO?
 

@@ -46,20 +46,47 @@
         line-height: 1.5;
         color: #000000;
 
-        // Jupyter notebook syntax highlighting colors
-        .k, .kn, .kd, .kr { color: #008000; font-weight: bold; } // keywords (green)
-        .s, .s1, .s2, .se { color: #BA2121; } // strings (red)
-        .nf { color: #0000FF; } // function names (blue)
-        .nb { color: #008000; } // built-ins (green)
-        .nc { color: #0000FF; font-weight: bold; } // class names (blue bold)
-        .nn { color: #0000FF; font-weight: bold; } // module names (blue bold)
-        .c, .c1, .cm { color: #408080; font-style: italic; } // comments (teal italic)
-        .mi, .mf { color: #666666; } // numbers (gray)
-        .o { color: #AA22FF; font-weight: bold; } // operators (purple)
-        .ow { color: #AA22FF; font-weight: bold; } // word operators
-        .bp { color: #008000; } // built-in pseudo (green)
-        .na { color: #7D9029; } // attribute names
-        .nt { color: #008000; font-weight: bold; } // tags
+        // Authentic Jupyter Notebook (IPython) syntax highlighting colors
+        // Based on IPython/Pygments default theme
+
+        // Keywords (def, class, import, from, if, for, etc.) - Green Bold
+        .k, .kn, .kd, .kr, .kc { color: #008000; font-weight: bold; }
+
+        // Strings - Red
+        .s, .s1, .s2, .se, .sb, .sc { color: #BA2121; }
+
+        // Function/Method names - Blue
+        .nf, .fm { color: #0000FF; }
+
+        // Built-in functions (print, len, range, etc.) - Green
+        .nb { color: #008000; }
+
+        // Class names - Blue Bold
+        .nc, .ne { color: #0000FF; font-weight: bold; }
+
+        // Module/Package names - Blue Bold
+        .nn { color: #0000FF; font-weight: bold; }
+
+        // Comments - Gray Italic (easier to see than teal)
+        .c, .c1, .cm, .ch { color: #408080; font-style: italic; }
+
+        // Numbers - Cyan Blue
+        .mi, .mf, .mh, .mo { color: #008080; }
+
+        // Operators (+, -, *, /, =, etc.) - Purple
+        .o, .ow { color: #AA22FF; font-weight: bold; }
+
+        // Variables, Names - Black (default, highly visible)
+        .n, .nv, .nx { color: #000000; }
+
+        // Self, cls - Purple Italic
+        .bp, .vc, .vg, .vi { color: #9C27B0; font-style: italic; }
+
+        // Decorators (@) - Teal
+        .nd, .na { color: #007C00; font-weight: bold; }
+
+        // Special names (__init__, __name__) - Dark Gray Bold
+        .vm { color: #333333; font-weight: bold; }
       }
     }
 
