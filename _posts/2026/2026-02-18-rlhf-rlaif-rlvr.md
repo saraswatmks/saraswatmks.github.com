@@ -200,7 +200,7 @@ Research shows AI judges agree with humans 70-85% of the time on straightforward
 
 But for many applications, that's good enough—especially since you can use multiple AI judges and ensemble their votes to improve reliability.
 
-The cost difference is staggering. Where RLHF might cost $500K for 50,000 labels, RLAIF might cost $5K in API calls. You can iterate weekly instead of quarterly. You can support 50 languages without hiring annotators for each one. But you're trading away some accuracy and introducing the risk that your judge model's biases become baked into your aligned model.
+The cost difference is staggering. Where RLHF might cost `$500K` for 50,000 labels, RLAIF might cost `$5K` in API calls. You can iterate weekly instead of quarterly. You can support 50 languages without hiring annotators for each one. But you're trading away some accuracy and introducing the risk that your judge model's biases become baked into your aligned model.
 
 Now, lets look at the third way, what if you didn't need judges at all?
 
