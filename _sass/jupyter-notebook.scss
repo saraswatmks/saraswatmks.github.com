@@ -52,8 +52,10 @@
         // Keywords (def, class, import, from, if, for, etc.) - Green Bold
         .k, .kn, .kd, .kr, .kc { color: #008000; font-weight: bold; }
 
-        // Strings - Red (including dictionary keys in quotes)
-        .s, .s1, .s2, .se, .sb, .sc, .dl { color: #BA2121; }
+        // Strings - Red (ALL string types, highest priority!)
+        .s, .s1, .s2, .se, .sb, .sc, .sd, .sh, .si, .sx, .sr, .ss, .dl {
+          color: #BA2121 !important;
+        }
 
         // Function/Method names - Blue
         .nf, .fm { color: #0000FF; }
@@ -67,35 +69,41 @@
         // Module/Package names - Blue Bold
         .nn { color: #0000FF; font-weight: bold; }
 
-        // Comments - Gray Italic (easier to see than teal)
-        .c, .c1, .cm, .ch { color: #408080; font-style: italic; }
+        // Comments - Gray Italic
+        .c, .c1, .cm, .ch, .cp { color: #408080; font-style: italic; }
 
         // Numbers - Cyan Blue
-        .mi, .mf, .mh, .mo { color: #008080; }
+        .mi, .mf, .mh, .mo, .mb, .il { color: #008080; }
 
         // Operators (+, -, *, /, =, etc.) - Purple
         .o, .ow { color: #AA22FF; font-weight: bold; }
 
         // Variables, Names - Black (default, highly visible)
-        .n, .nv, .nx { color: #000000; }
+        .n, .nv { color: #000000; }
 
         // Self, cls - Purple Italic
         .bp, .vc, .vg, .vi { color: #9C27B0; font-style: italic; }
 
-        // Decorators (@) - Teal
-        .nd, .na { color: #007C00; font-weight: bold; }
+        // Decorators (@) - Teal Bold
+        .nd { color: #007C00; font-weight: bold; }
 
         // Special names (__init__, __name__) - Dark Gray Bold
         .vm { color: #333333; font-weight: bold; }
 
         // Punctuation (brackets, braces, parentheses, colons, commas) - Black
-        .p, .punctuation { color: #000000; }
+        .p, .punctuation { color: #000000 !important; }
 
-        // JSON-specific: property names (keys) - Blue
-        .property, .nt, .nx { color: #0000FF; }
+        // Attribute names (for JSON/YAML keys) - Red like strings
+        .na { color: #BA2121 !important; }
 
-        // YAML/JSON keys without quotes - Blue
-        .na { color: #0000FF; }
+        // JSON/YAML property names without quotes - Blue
+        .property { color: #0000FF; }
+
+        // Name tags (XML/HTML) - Blue
+        .nt { color: #0000FF; }
+
+        // General names that aren't covered - Black
+        .nx { color: #000000; }
       }
     }
 
@@ -104,7 +112,25 @@
     &.language-shell {
       pre code {
         .nb, .nv { color: #19177C; } // built-ins and variables (dark blue)
-        .s, .s1, .s2 { color: #BA2121; } // strings (red)
+        .s, .s1, .s2 { color: #BA2121 !important; } // strings (red)
+      }
+    }
+
+    // Special styling for JSON - ensure strings are always red
+    &.language-json {
+      pre code {
+        .s, .s1, .s2, .na { color: #BA2121 !important; } // all strings/keys red
+        .nt { color: #BA2121 !important; } // property names red
+        .p { color: #000000 !important; } // punctuation black
+      }
+    }
+
+    // Special styling for YAML
+    &.language-yaml {
+      pre code {
+        .s, .s1, .s2 { color: #BA2121 !important; } // strings red
+        .na { color: #BA2121 !important; } // keys red
+        .p { color: #000000 !important; } // punctuation black
       }
     }
   }
