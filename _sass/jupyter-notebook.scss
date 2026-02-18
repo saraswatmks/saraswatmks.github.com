@@ -31,6 +31,17 @@
       text-align: right;
     }
 
+    // Exception: if this code block comes after a paragraph, it's an output cell
+    p + & {
+      border-left: 4px solid #cfcfcf;
+
+      &::before {
+        content: "Out[ ]:" !important;
+        color: #d84315 !important;
+      }
+    }
+  }
+
     pre {
       margin: 0;
       padding: 10px 12px;
@@ -215,17 +226,6 @@
     }
   }
 
-  /* Special styling for code output (code blocks after paragraphs with "Output:") */
-  // Target code blocks that immediately follow a paragraph
-  p + div[class^="language-"],
-  p + div[class*=" language-"] {
-    border-left: 4px solid #cfcfcf;
-
-    &::before {
-      content: "Out[ ]:" !important;
-      color: #d84315 !important;
-    }
-  }
 
   /* Markdown cells styling */
   h1, h2, h3, h4, h5, h6 {

@@ -1,6 +1,17 @@
 ---
 layout: home
 author_profile: true
-paginate: true
 entries_layout: list
 ---
+
+{% assign posts = site.posts | where_exp: "post", "post.categories contains 'notebooks' == false" %}
+
+<div class="entries-{{ entries_layout }}">
+  {% for post in posts limit: 10 %}
+    {% include archive-single.html type=entries_layout %}
+  {% endfor %}
+</div>
+
+{% if posts.size > 10 %}
+  {% include paginator.html %}
+{% endif %}
