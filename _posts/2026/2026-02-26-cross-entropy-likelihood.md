@@ -10,7 +10,7 @@ header:
   overlay_filter: 0.5
 ---
 
-# Cross-Entropy Loss Explained: The MLE Connection Every ML Engineer Should Know
+# Cross Entropy Loss Connection to GPT Models
 
 Most applied researchers or ml engineers use `F.cross_entropy(logits, labels)` dozens of times a week. But, not a lot of them could explain, from first principles, why that particular function is the right one to minimize. 
 
@@ -280,7 +280,7 @@ Variational Autoencoders minimize the Evidence Lower Bound (ELBO), which is a re
 
 Even things that do not look like NLL at first — hinge loss, focal loss, contrastive loss — can often be interpreted as NLL under modified or reweighted likelihood models.
 
-"The entire modern AI training stack is, at its core, a coin-flip problem scaled to petabytes."
+*The entire modern AI training stack is, at its core, a coin-flip problem scaled to petabytes.*
 
 ## Summary
 
