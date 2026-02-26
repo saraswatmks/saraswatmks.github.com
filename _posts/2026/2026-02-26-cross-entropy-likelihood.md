@@ -1,9 +1,9 @@
 ---
-title: "Cross-Entropy Loss Explained: The MLE Connection Every ML Engineer Should Know"
+title: "Cross-Entropy Loss Explained: What Every ML Engineer Should Know"
 date: 2026-02-26
 tags:
 - deeplearning
-excerpt: "Cross-entropy loss isn't a heuristic — it is maximum likelihood estimation with a sign flip. This guide derives binary cross-entropy from first principles, explains why its gradient self-adjusts, and shows how the same math powers GPT training."
+excerpt: "Cross-entropy loss isn't a heuristic — it is maximum likelihood estimation with a sign flip. It also shows how the same math powers GPT training."
 header:
   teaser: /assets/images/mle-tutorial-chart-likelihood.png
   overlay_image: /assets/images/mle-tutorial-chart-likelihood.png
@@ -19,14 +19,14 @@ The answer turns out to be both simpler and deeper than most people expect. It s
 
 ## Table of Contents
 
-1. [What Is Maximum Likelihood Estimation?](#part-1-the-coin-flip-problem)
-2. [The Log Trick: Why Log-Likelihood Is Numerically Stable](#part-2-the-log-trick)
-3. [The Sign Flip: Connecting MLE to Gradient Descent](#part-3-the-sign-flip)
-4. [Binary Cross-Entropy Loss Is Exactly NLL — Proof](#part-4-binary-cross-entropy-is-exactly-nll)
-5. [Why the Cross-Entropy Gradient Self-Adjusts (and MSE Doesn't)](#part-5-the-self-adjusting-gradient)
-6. [How LLM Training Loss and Perplexity Are Just MLE at Scale](#part-6-mle-all-the-way-to-gpt)
-7. [RLHF, VAEs, and Diffusion Models: MLE in Disguise](#the-mind-blowing-part)
-8. [TL;DR](#tldr)
+1. [What Is Maximum Likelihood Estimation?](#what-is-maximum-likelihood-estimation)
+2. [The Log Trick: Why Log-Likelihood Is Numerically Stable](#the-log-trick-why-log-likelihood-is-numerically-stable)
+3. [The Sign Flip: Connecting MLE to Gradient Descent](#the-sign-flip-connecting-mle-to-gradient-descent)
+4. [Binary Cross-Entropy Loss Is Exactly NLL — Proof](#binary-cross-entropy-loss-is-exactly-nll--proof)
+5. [Why the Cross-Entropy Gradient Self-Adjusts (and MSE Doesn't)](#why-the-cross-entropy-gradient-self-adjusts-and-mse-doesnt)
+6. [How LLM Training Loss and Perplexity Are Just MLE at Scale](#how-llm-training-loss-and-perplexity-are-just-mle-at-scale)
+7. [RLHF, VAEs, and Diffusion Models: MLE in Disguise](#rlhf-vaes-and-diffusion-models-mle-in-disguise)
+8. [Summary](#summary)
 
 
 ## What Is Maximum Likelihood Estimation? 
