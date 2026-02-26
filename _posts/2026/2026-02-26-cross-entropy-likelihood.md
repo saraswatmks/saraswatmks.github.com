@@ -169,7 +169,7 @@ The loss when p-hat = 0.001 and y = 1 is -log(0.001) = 6.9. When p-hat = 0.999 a
 
 ## Why the Cross-Entropy Gradient Self-Adjusts (and MSE Doesn't)
 
-One of the most underappreciated properties of log loss is what happens to its gradient. The derivative of -log(p) with respect to p is -1/p. Think about what that means.
+One of the most underappreciated properties of log loss is what happens to its gradient. The derivative of `-log(p)` with respect to p is `-1/p`. Think about what that means.
 
 When the model assigns a probability of 0.9 to the correct class, the gradient magnitude is 1/0.9 = 1.1. Small. The model is already doing well; the update should be gentle.
 
@@ -177,7 +177,7 @@ When the model assigns a probability of 0.1 to the correct class, the gradient m
 
 When the model assigns a probability of 0.001, the gradient is 1000. The model is catastrophically miscalibrated; the update is proportionally aggressive.
 
-This self-adjusting behavior is not a feature that was engineered in. It emerges directly from the shape of the logarithm. The log curve is steep near zero and flat near one — and since we are minimizing its negation, that translates into large gradients when the model is wrong and small gradients when it is right.
+This self-adjusting behavior is not a feature that was engineered in. It emerges directly from the shape of the logarithm. The log curve is steep near zero and flat near one and since we are minimizing its negation, that translates into large gradients when the model is wrong and small gradients when it is right.
 
 The code below computes and plots gradient magnitude as a function of predicted probability.
 
@@ -189,12 +189,14 @@ grad_magnitude = 1 / p    # derivative of -log(p) w.r.t. p is -1/p, magnitude is
 
 Below we see a hyperbola decreasing from very large values near p=0 to approaching 1 near p=1.
 
-Compare to MSE. The gradient of (1-p)^2 is 2(1-p), which is at most 2 (when p=0). BCE gradients are unbounded as p approaches zero. This is why BCE trains classification models dramatically faster than MSE — the loss function is essentially shrieking at the model when it makes confident mistakes.
+Compare to MSE. The gradient of `(1-p)^2` is `2(1-p)`, which is at most 2 (when p=0). BCE gradients are unbounded as p approaches zero. This is why BCE trains classification models dramatically faster than MSE the loss function is essentially shrieking at the model when it makes confident mistakes.
 
 The difference is stark in practice. At p-hat = 0.01 with a true label of 1:
 
+```
 - BCE loss = -log(0.01) = 4.60, gradient = 100
 - MSE loss = (1 - 0.01)^2 = 0.98, gradient = 1.98
+```
 
 MSE is capped. BCE is not. BCE keeps screaming at the model until it gets the probability right.
 
