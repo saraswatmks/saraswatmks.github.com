@@ -3,6 +3,7 @@ title: "Cross Entropy Loss Connection to GPT Models"
 date: 2026-02-26
 tags:
 - deeplearning
+- llm
 excerpt: "Cross-entropy loss isn't a heuristic — it is maximum likelihood estimation with a sign flip. It also shows how the same math powers GPT training."
 header:
   teaser: /assets/images/mle-tutorial-chart-likelihood.png
@@ -198,7 +199,7 @@ The difference is stark in practice. At p-hat = 0.01 with a true label of 1:
 - MSE loss = (1 - 0.01)^2 = 0.98, gradient = 1.98
 ```
 
-MSE is capped. BCE is not. BCE keeps screaming at the model until it gets the probability right.
+> MSE is capped. BCE is not. BCE keeps screaming at the model until it gets the probability right.
 
 <!-- INSERT CHART: mle-tutorial-chart-gradient.png -->
 ![BCE vs MSE, gradient magnitude, and NLL to perplexity](/assets/images/mle-tutorial-chart-gradient.png)
@@ -209,7 +210,7 @@ MSE is capped. BCE is not. BCE keeps screaming at the model until it gets the pr
 
 Everything above scales directly to large language models, and the translation is surprisingly literal.
 
-A language model is trained on text sequences. Each sequence is a list of tokens: words, subwords, punctuation marks. The model's job is to predict the next token given all previous tokens. At each position t, the model outputs a probability distribution over the entire vocabulary — maybe 50,000 tokens — using a softmax layer.
+A language model is trained on text sequences. Each sequence is a list of tokens: words, subwords, punctuation marks. The model's job is to predict the next token given all previous tokens. At each position t, the model outputs a probability distribution over the entire vocabulary, maybe 50,000 tokens using a softmax layer.
 
 The probability the model assigns to the entire sequence is the product of its per-token predictions:
 
@@ -234,16 +235,16 @@ print(perplexities)
 {'Random': 50000, 'GPT-2': 36.6, 'GPT-4': 9.0}
 ```
 
-Perplexity = exp(NLL per token). A perplexity of 9 means the model is about as uncertain as if it were choosing uniformly among 9 options. A random guesser over a 50,000-word vocabulary has perplexity 50,000. The entire history of LLM progress is a story of driving this number down.
+Perplexity = exp(NLL per token). A perplexity of 9 means the model is about as uncertain as if it were choosing uniformly among 9 options. A random guesser over a 50,000 word vocabulary has perplexity 50,000. The entire history of LLM progress is a story of driving this number down.
 
-So when researchers compare GPT-2 to GPT-5, they are comparing two MLE solutions to the same problem — maximizing the likelihood of English text — obtained with different model sizes and different amounts of compute. GPT-5's lower perplexity means it found a better maximum-likelihood estimate of how language works.
+So when researchers compare GPT-2 to GPT-5, they are comparing two MLE solutions to the same problem, maximizing the likelihood of English text obtained with different model sizes and different amounts of compute. GPT-5's lower perplexity means it found a better maximum-likelihood estimate of how language works.
 
 
 ## The Cross-Entropy Loss Pipeline: From Coin Flip to GPT
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -251,21 +252,28 @@ So when researchers compare GPT-2 to GPT-5, they are comparing two MLE solutions
     'primaryTextColor': '#1F2937',
     'primaryBorderColor': '#9CA3AF',
     'lineColor': '#6B7280',
-    'fontSize': '24px',
+    'fontSize': '16px',
     'fontFamily': 'system-ui, -apple-system, sans-serif'
+  },
+  'flowchart': {
+    'nodeSpacing': 60,
+    'rankSpacing': 100,
+    'padding': 20,
+    'useMaxWidth': true,
+    'htmlLabels': true
   }
 }}%%
 
 flowchart LR
-    A["Observed Data\n(7H 3T coin flips)"] --> B["Likelihood\nL(θ) = θ⁷(1-θ)³"]
-    B --> C["Log-Likelihood\nlog L(θ) = 7logθ + 3log(1-θ)\nproduct → sum"]
-    C --> D["Negate\n× -1\n(sign flip)"]
-    D --> E["NLL\n-log L(θ)\nGradient descent minimizes"]
-    E --> F1["Binary CE\n-[y log p̂ + (1-y)log(1-p̂)]\nLogistic regression"]
-    E --> F2["Multi-class CE\n-log p_true_class\nafter softmax"]
-    E --> F3["LLM Loss\n-(1/T)Σ log P(wₜ|ctx)\nGPT, LLaMA, Gemini"]
-    F3 --> G["Perplexity\nexp(NLL per token)\nGPT-2≈37, GPT-4≈9"]
-```
+    A["Observed Data<br/>(7H 3T coin flips)"] --> B["Likelihood<br/>L(θ) = θ⁷(1-θ)³"]
+    B --> C["Log-Likelihood<br/>log L(θ) = 7logθ + 3log(1-θ)<br/>product → sum"]
+    C --> D["Negate<br/>× -1<br/>(sign flip)"]
+    D --> E["NLL<br/>-log L(θ)<br/>Gradient descent minimizes"]
+    E --> F1["Binary CE<br/>-[y log p̂ + (1-y)log(1-p̂)]<br/>Logistic regression"]
+    E --> F2["Multi-class CE<br/>-log p_true_class<br/>after softmax"]
+    E --> F3["LLM Loss<br/>-(1/T)Σ log P(wₜ|ctx)<br/>GPT, LLaMA, Gemini"]
+    F3 --> G["Perplexity<br/>exp(NLL per token)<br/>GPT-2≈37, GPT-4≈9"]
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -276,7 +284,7 @@ flowchart LR
 
 Here is where it gets strange. The story does not end with classification and language modeling. It turns out that virtually every loss function in modern deep learning is, with some algebraic work, the NLL of some probability distribution under some modeling assumption.
 
-Reinforcement Learning from Human Feedback (RLHF) — the technique that makes ChatGPT follow instructions — trains a reward model using a loss that is **-log(sigmoid(r_chosen - r_rejected))**. That is the NLL of a Bradley-Terry pairwise preference model. MLE in disguise.
+[Reinforcement Learning from Human Feedback (RLHF)](https://saraswatmks.github.io/2026/02/rlhf-rlaif-rlvr.html), the technique that makes ChatGPT follow instructions, trains a reward model using a loss that is **-log(sigmoid(r_chosen - r_rejected))**. That is the NLL of a Bradley-Terry pairwise preference model. MLE in disguise.
 
 Variational Autoencoders minimize the Evidence Lower Bound (ELBO), which is a reconstruction term (NLL under Gaussian or Bernoulli assumptions) plus a KL divergence regularizer. The reconstruction term is NLL. MLE in disguise.
 
