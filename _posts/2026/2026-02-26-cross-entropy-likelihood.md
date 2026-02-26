@@ -1,5 +1,5 @@
 ---
-title: "Cross-Entropy Loss Explained: What Every ML Engineer Should Know"
+title: "Cross Entropy Loss Connection to GPT Models"
 date: 2026-02-26
 tags:
 - deeplearning
