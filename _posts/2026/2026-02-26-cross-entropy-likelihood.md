@@ -4,7 +4,7 @@ date: 2026-02-26
 tags:
 - deeplearning
 - llm
-excerpt: "Cross-entropy loss isn't a heuristic — it is maximum likelihood estimation with a sign flip. It also shows how the same math powers GPT training."
+excerpt: "Cross-entropy loss isn't a heuristic, it is maximum likelihood estimation with a sign flip. It also shows how the same math powers GPT training."
 header:
   teaser: /assets/images/mle-tutorial-chart-likelihood.png
   overlay_image: /assets/images/mle-tutorial-chart-likelihood.png
@@ -23,7 +23,7 @@ The answer turns out to be both simpler and deeper than most people expect. It s
 1. [What Is Maximum Likelihood Estimation?](#what-is-maximum-likelihood-estimation)
 2. [The Log Trick: Why Log-Likelihood Is Numerically Stable](#the-log-trick-why-log-likelihood-is-numerically-stable)
 3. [The Sign Flip: Connecting MLE to Gradient Descent](#the-sign-flip-connecting-mle-to-gradient-descent)
-4. [Binary Cross-Entropy Loss Is Exactly NLL — Proof](#binary-cross-entropy-loss-is-exactly-nll--proof)
+4. [Binary Cross-Entropy Loss Is Exactly NLL](#binary-cross-entropy-loss-is-exactly-nll)
 5. [Why the Cross-Entropy Gradient Self-Adjusts (and MSE Doesn't)](#why-the-cross-entropy-gradient-self-adjusts-and-mse-doesnt)
 6. [How LLM Training Loss and Perplexity Are Just MLE at Scale](#how-llm-training-loss-and-perplexity-are-just-mle-at-scale)
 7. [RLHF, VAEs, and Diffusion Models: MLE in Disguise](#rlhf-vaes-and-diffusion-models-mle-in-disguise)
@@ -132,9 +132,9 @@ So when someone says *we trained this model with cross-entropy loss*, what they 
 *Three views of the same optimum: likelihood L(θ), log-likelihood log L(θ), and NLL −log L(θ) all locate their peak or minimum at θ = 0.7.*
 
 
-## Binary Cross-Entropy Loss Is Exactly NLL — Proof
+## Binary Cross-Entropy Loss Is Exactly NLL
 
-Now apply this to a binary classifier. The model takes in some features and outputs a single number, which a sigmoid squashes to a probability p-hat between zero and one. You want p-hat close to one when the true label is one, and close to zero when the true label is zero.
+Now apply this to a binary classifier. The model takes in some features and outputs a single number, which a sigmoid squashes to a probability p-hat between 0 and 1. You want p-hat close to 1 when the true label is 1, and close to 0 when the true label is 0.
 
 The probability the model assigns to the observed label y (which is either 0 or 1) is:
 
@@ -159,7 +159,7 @@ bce_negative = -np.log(1 - p_hat)    # y=0: loss when true label is negative
 
 Lets focus on the two curves below. For y=1, loss is high when p-hat is low (model is wrong) and approaches zero as p-hat approaches one. For y=0, the mirror image.
 
-The asymmetry is not a design choice. It follows directly from the log of a Bernoulli probability. **Being confidently wrong produces enormous loss** because log of a near-zero probability is a large negative number — and we are minimizing the negation.
+The asymmetry is not a design choice. It follows directly from the log of a Bernoulli probability. **Being confidently wrong produces enormous loss** because log of a near-zero probability is a large negative number, and we are minimizing the negation.
 
 <!-- INSERT CHART: mle-tutorial-chart-training.png -->
 ![Logistic regression training via MLE](/assets/images/mle-tutorial-chart-training.png)
@@ -190,7 +190,7 @@ grad_magnitude = 1 / p    # derivative of -log(p) w.r.t. p is -1/p, magnitude is
 
 Below we see a hyperbola decreasing from very large values near p=0 to approaching 1 near p=1.
 
-Compare to MSE. The gradient of `(1-p)^2` is `2(1-p)`, which is at most 2 (when p=0). BCE gradients are unbounded as p approaches zero. This is why BCE trains classification models dramatically faster than MSE the loss function is essentially shrieking at the model when it makes confident mistakes.
+Compare to MSE, the gradient of `(1-p)^2` is `2(1-p)`, which is at most 2 (when p=0). BCE gradients are unbounded as p approaches zero. This is why BCE trains classification models dramatically faster than MSE the loss function is essentially shrieking at the model when it makes confident mistakes.
 
 The difference is stark in practice. At p-hat = 0.01 with a true label of 1:
 
