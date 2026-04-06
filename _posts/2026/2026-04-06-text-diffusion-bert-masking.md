@@ -129,13 +129,13 @@ One hyperparameter. That's the gap between "pretraining objective" and "generati
 
 Here's where we actually generate text, and this is the part where the running example shifts meaning. In Parts 1 and 2, we corrupted and trained on "the cat sat on the mat." But generation doesn't reconstruct a known sentence, it produces a NEW one from scratch. The model starts from pure void and builds whatever its learned distribution suggests. Let's understand the flow of generation:
 
-But how does the model decide WHICH tokens to reveal at each step? There's no fixed confidence threshold — instead, the noise schedule determines *how many* tokens to unmask this step (a count, not a cutoff), and the model's confidence determines *which ones*.
+But how does the model decide WHICH tokens to reveal at each step? There's no fixed confidence threshold, instead, the noise schedule determines *how many* tokens to unmask this step (a count, not a cutoff), and the model's confidence determines *which ones*.
 
-Step 1: the model sees "`[MASK]` `[MASK]` `[MASK]` `[MASK]` `[MASK]` `[MASK]`", six blanks. It produces probability distributions for each position. Maybe it's 83% confident position 1 should be "the" and 71% confident position 3 should be "sat," but only 30% confident about position 6. The schedule says "unmask 2 tokens this round," so it picks the top 2 by confidence, "the" and "sat." Everything else stays masked.
+**Step 1:** the model sees "`[MASK]` `[MASK]` `[MASK]` `[MASK]` `[MASK]` `[MASK]`", six blanks. It produces probability distributions for each position. Maybe it's 83% confident position 1 should be "the" and 71% confident position 3 should be "sat," but only 30% confident about position 6. The schedule says "unmask 2 tokens this round," so it picks the top 2 by confidence, "the" and "sat." Everything else stays masked.
 
-Step 2: now it sees "the `[MASK]` sat `[MASK]` `[MASK]` `[MASK]`." With "the" and "sat" locked in, "on" at position 4 becomes likely, 89% confidence. It commits "on" and maybe "the" at position 5.
+**Step 2:** now it sees "the `[MASK]` sat `[MASK]` `[MASK]` `[MASK]`." With "the" and "sat" locked in, "on" at position 4 becomes likely, 89% confidence. It commits "on" and maybe "the" at position 5.
 
-Step 3: "the `[MASK]` sat on the `[MASK]`." Now the remaining blanks have enough scaffolding. Maybe it produces "cat" and "mat." Maybe "dog" and "floor." Each generation is different, the model samples from its distribution, not from a target.
+**Step 3:** "the `[MASK]` sat on the `[MASK]`." Now the remaining blanks have enough scaffolding. Maybe it produces "cat" and "mat." Maybe "dog" and "floor." Each generation is different, the model samples from its distribution, not from a target.
 
 Three passes. Six tokens. An autoregressive model would need six forward passes, one per token, strictly left to right, each one committed permanently. This needed three, and it filled in easy tokens first regardless of position.
 
@@ -177,7 +177,7 @@ This generates text in parallel i.e. multiple tokens per step and fills in easy 
 
 <div style="background-color: #F9FAFB; border: 2px solid #D1D5DB; border-radius: 8px; padding: 10px; margin: 20px 0; position: relative;">
 
-```mermaid
+<div class="mermaid">
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -199,7 +199,7 @@ flowchart LR
     style B fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style C fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
     style D fill:#FFFFFF,stroke:#9CA3AF,stroke-width:2px,color:#1F2937
-```
+</div>
 
 <div style="text-align: center; color: #9CA3AF; font-size: 11px; margin-top: 8px;">© FloatingBytes | saraswatmks.github.io</div>
 
@@ -220,7 +220,7 @@ No approximation.
 
 **2. training signal density.** : An autoregressive model gets a useful gradient at every single position in every single training example. Every token is a prediction target. A diffusion model only gets signal at masked positions, and the quality of that signal varies wildly, at 5% corruption the task is trivial, at 95% corruption it's almost random guessing. The model spends significant capacity learning to handle noise levels where the learning signal is weak. AR models waste nothing.
 
-**3. ten years of engineering.** : KV caching, speculative decoding, quantization, custom hardware — autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
+**3. ten years of engineering.** : KV caching, speculative decoding, quantization, custom hardware autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
 
 Where diffusion does have a structural edge is constrained generation, fill in a paragraph where you know the beginning AND the end, rewrite a middle section, complete text with constraints on both sides. Autoregressive models can only condition on the left. Diffusion conditions on everything that's already been revealed, wherever it sits. For that specific job, the architecture is genuinely better suited.
 
