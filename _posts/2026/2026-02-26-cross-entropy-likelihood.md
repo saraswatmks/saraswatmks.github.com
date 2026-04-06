@@ -288,7 +288,7 @@ Here is where it gets strange. The story does not end with classification and la
 
 Variational Autoencoders minimize the Evidence Lower Bound (ELBO), which is a reconstruction term (NLL under Gaussian or Bernoulli assumptions) plus a KL divergence regularizer. The reconstruction term is NLL. MLE in disguise.
 
-Even things that do not look like NLL at first — hinge loss, focal loss, contrastive loss — can often be interpreted as NLL under modified or reweighted likelihood models.
+Even things that do not look like NLL at first, hinge loss, focal loss, contrastive loss, can often be interpreted as NLL under modified or reweighted likelihood models.
 
 *The entire modern AI training stack is, at its core, a coin-flip problem scaled to petabytes.*
 
