@@ -218,9 +218,9 @@ $$p(x) = p(x_1) \cdot p(x_2 \mid x_1) \cdot p(x_3 \mid x_1, x_2) \cdots$$
 
 No approximation.
 
-**2. training signal density.** : An autoregressive model gets a useful gradient at every single position in every single training example. Every token is a prediction target. A diffusion model only gets signal at masked positions, and the quality of that signal varies wildly, at 5% corruption the task is trivial, at 95% corruption it's almost random guessing. The model spends significant capacity learning to handle noise levels where the learning signal is weak. AR models waste nothing.
+**2. Training signal density.** : An autoregressive model gets a useful gradient at every single position in every single training example. Every token is a prediction target. A diffusion model only gets signal at masked positions, and the quality of that signal varies wildly, at 5% corruption the task is trivial, at 95% corruption it's almost random guessing. The model spends significant capacity learning to handle noise levels where the learning signal is weak. AR models waste nothing.
 
-**3. ten years of engineering.** : KV caching, speculative decoding, quantization, custom hardware autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
+**3. Ten years of engineering.** : KV caching, speculative decoding, quantization, custom hardware autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
 
 Where diffusion does have a structural edge is constrained generation, fill in a paragraph where you know the beginning AND the end, rewrite a middle section, complete text with constraints on both sides. Autoregressive models can only condition on the left. Diffusion conditions on everything that's already been revealed, wherever it sits. For that specific job, the architecture is genuinely better suited.
 
