@@ -11,7 +11,7 @@ header:
   overlay_filter: 0.5
 ---
 
-Something had been bugging me about BERT for a while, and I couldn't quite place it. Here's a model that we've trained to fill in blanks, give it a sentence with 15% of the tokens masked and it'll predict what goes there. And it's terrifyingly good at that job. But then we just... stopped. We took this model that excels at reconstructing corrupted text and decided it could only ever work at exactly one level of corruption.
+Something has been bugging me about BERT for a while, and I couldn't quite place it. Here's a model that we've trained to fill in blanks, give it a sentence with 15% of the tokens masked and it'll predict what goes there. And it's terrifyingly good at that job. But then we just... stopped. We took this model that excels at reconstructing corrupted text and decided it could only ever work at exactly one level of corruption.
 
 What if it could handle 20%? Or 50%? Or 95%? What if you cranked the dial all the way to "every single token is missing" and asked it to reconstruct the whole thing from nothing?
 
@@ -23,8 +23,7 @@ That's text diffusion. And the strange part isn't that it works. The strange par
 - [Part 2: The Model That Learns to Clean Up](#part-2-the-model-that-learns-to-clean-up)
 - [Part 3: Solving the Crossword](#part-3-solving-the-crossword)
 - [Part 4: Why Autoregressive Still Wins (For Now)](#part-4-why-autoregressive-still-wins-for-now)
-- [Part 5: The Thought Someone Forgot to Finish](#part-5-the-thought-someone-forgot-to-finish)
-- [TL;DR](#tldr)
+- [Part 5: Summary](#summary)
 
 
 ## Part 1: Understanding to mask tokens
@@ -213,15 +212,19 @@ So if diffusion can generate multiple tokens per step and fill in blanks from bo
 
 I think there are three aspects we have to understand, and they're all worth understanding because they display something deep about language itself.
 
-**First: language is ruthlessly sequential.** "The cat sat on the" constrains what comes next in a way that images don't. In an image, knowing the top-left pixel tells you almost nothing about the bottom-right one. Autoregressive models exploit this perfectly, the chain rule factorization $p(x) = p(x_1) \cdot p(x_2|x_1) \cdot p(x_3|x_1,x_2) \cdots$ is the exact probability of the sequence. No approximation. 
+**1. Language is ruthlessly sequential.** "The cat sat on the" constrains what comes next in a way that images don't. In an image, knowing the top-left pixel tells you almost nothing about the bottom-right one. Autoregressive models exploit this perfectly — the chain rule factorization gives the exact probability of a sequence:
 
-**Second: training signal density.** An autoregressive model gets a useful gradient at every single position in every single training example. Every token is a prediction target. A diffusion model only gets signal at masked positions, and the quality of that signal varies wildly, at 5% corruption the task is trivial, at 95% corruption it's almost random guessing. The model spends significant capacity learning to handle noise levels where the learning signal is weak. AR models waste nothing.
+$$p(x) = p(x_1) \cdot p(x_2 \mid x_1) \cdot p(x_3 \mid x_1, x_2) \cdots$$
 
-**Third: ten years of engineering.** KV caching, speculative decoding, quantization, custom hardware — autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
+No approximation.
+
+**2. training signal density.** : An autoregressive model gets a useful gradient at every single position in every single training example. Every token is a prediction target. A diffusion model only gets signal at masked positions, and the quality of that signal varies wildly, at 5% corruption the task is trivial, at 95% corruption it's almost random guessing. The model spends significant capacity learning to handle noise levels where the learning signal is weak. AR models waste nothing.
+
+**3. ten years of engineering.** : KV caching, speculative decoding, quantization, custom hardware — autoregressive generation has had billions of dollars of optimization poured into making it fast and reliable. Text diffusion is where image diffusion was around 2019: the core idea works, the engineering hasn't caught up. This isn't a fundamental limitation, but it's a real one right now.
 
 Where diffusion does have a structural edge is constrained generation, fill in a paragraph where you know the beginning AND the end, rewrite a middle section, complete text with constraints on both sides. Autoregressive models can only condition on the left. Diffusion conditions on everything that's already been revealed, wherever it sits. For that specific job, the architecture is genuinely better suited.
 
-## Final Notes
+## Summary
 
 In this post, we learned about the how BERT's masked language modeling is half way through the full fledged text diffusion approach.
 
