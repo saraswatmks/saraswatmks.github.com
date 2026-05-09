@@ -13,7 +13,7 @@ header:
 
 # Deep Dive into Fine Tuning a LoRA Reranker on Phi-3
 
-I recently finished reading the <a href="https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook" target="_blank">huggingface playbook</a> and got super excited about digging myself into a LLM internals.
+I recently finished reading the <a href="https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook" target="_blank">huggingface playbook</a> and got super excited about digging into the LLM internals.
 
 So, I fine tuned a 3.8 billion parameter language model to rank search results and tried to visualise internals. Every gradient norm at every layer. Every attention pattern before and after. Every hidden state at five different depths of the network.
 
@@ -27,7 +27,7 @@ In this post, I want to share the behaviour of the phi 3 LLM on a reranking task
 4. [What about Attention layers](#part-4-what-about-attention-layers)
 5. [The Ablation That Broke My Theory](#part-5-the-ablation-that-broke-my-theory)
 6. [The Telescope](#part-6-the-telescope)
-7. [TL;DR](#tldr)
+7. [Summary](#Summary)
 
 ## Part 1: The Coin Flip
 
@@ -188,16 +188,14 @@ The middle layers alone are almost sufficient. And adding the early layers to th
 
 This is a finding I didn't expect at any point during this experiment. The layers that receive the most gradient signal aren't just "not the most important" — they're actively harmful when trained in isolation with the middle layers. The optimal strategy appears to be: let the middle layers learn, and leave everything else alone.
 
+## Summary
 
-## Part 6: The Telescope
+In this post, I fine-tuned a Phi-3 Mini (3.8B) as a pairwise reranker on MS MARCO using LoRA, and logged per-layer gradient norms, attention patterns, and hidden state linear probes throughout training.
 
 Here's the thing that ties all of this together. The gradient norms told me where the WEIGHTS changed. The linear probes told me where the REPRESENTATIONS changed. And those are two completely different places.
 
 This reframes how we should think about LoRA fine tuning for ranking. We're not teaching the model a new concept in its deep layers. We're not building a "ranking circuit" in the late attention heads. We're adjusting the input processing, the way tokens are initially encoded and letting the existing transformer stack propagate that adjustment into a useful representation. The ranking knowledge was already distributed throughout the pretrained model. LoRA just adjusted the front door so the right information could flow through.
 
-## Summary
-
-In this post, I fine-tuned a Phi-3 Mini (3.8B) as a pairwise reranker on MS MARCO using LoRA, and logged per-layer gradient norms, attention patterns, and hidden state linear probes throughout training. I learned a lot more about how gradient updates and linear probing can tell completely different story of model's learnt ability.
 
 I ran this experiment on single A100 40GB using 50,000 MS MARCO passage ranking triples.
 
