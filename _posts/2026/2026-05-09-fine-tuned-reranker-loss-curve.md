@@ -1,6 +1,6 @@
 ---
 title: "Fine-Tuning a LoRA Reranker on Phi-3: What the Loss Curve Told Me"
-date: 2026-05-15
+date: 2026-05-09
 tags:
 - deeplearning
 - learning-to-rank
