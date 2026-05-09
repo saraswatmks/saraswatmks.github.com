@@ -1,17 +1,17 @@
 ---
-title: "Fine-Tuning a LoRA Reranker on Phi-3: What the Loss Curve Told Me"
+title: "Deep Dive into Fine Tuning a LoRA Reranker on Phi-3"
 date: 2026-05-09
 tags:
 - deeplearning
 - learning-to-rank
-excerpt: "I fine-tuned Phi-3 as a pairwise reranker with LoRA and logged every gradient. Early layers changed 200x more than late layers, but ranking representations only emerged at layer 16+. The attention maps changed exactly zero percent."
+excerpt: "I fine tuned Phi-3 as a pairwise reranker with LoRA and logged every gradient. Early layers changed 200x more than late layers, but ranking representations only emerged at layer 16+. The attention maps changed exactly zero percent."
 header:
   teaser: /assets/images/fig_combined_summary.png
   overlay_image: /assets/images/fig_combined_summary.png
   overlay_filter: 0.5
 ---
 
-# Fine-Tuning a LoRA Reranker on Phi-3: What the Loss Curve Told Me
+# Deep Dive into Fine Tuning a LoRA Reranker on Phi-3
 
 I recently finished reading the <a href="https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook" target="_blank">huggingface playbook</a> and got super excited about digging myself into a LLM internals.
 
