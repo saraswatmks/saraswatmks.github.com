@@ -21,7 +21,7 @@ job is starving the other. Until you separate them, you're leaving most of your 
 This is the story of how I built a disaggregated prefill/decode architecture
 for a real-time chat suggestion system serving 40M monthly active users and what I learned pulling apart something most teams treat as a single monolith.
 
----
+
 
 ## Table of Contents
 1. [The Problem: Two Jobs, One GPU](#the-problem-two-jobs-one-gpu)
@@ -119,10 +119,6 @@ gantt
 
 Req-B's decode is blocked waiting for req-C's prefill. TTFT for req-C's first token starts only after the prefill finishes. Everyone waits for everyone.
 
----
-
-### Profiling: What the Data Actually Showed
-
 Before building anything, I profiled. The numbers made the decision obvious.
 
 Using `nsys profile` on a saturated H100 at 1,000 req/s:
@@ -138,7 +134,6 @@ Decode was using 12% of compute while consuming 91% of memory bandwidth. I was p
 
 The fix was obvious: give prefill the compute, give decode the memory bandwidth. Stop compromising both.
 
----
 
 ## The Architecture
 
@@ -293,7 +288,7 @@ print(f"Decode GPUs needed:  {gpus_decode}")   # 1
 
 I also enabled **chunked prefill** which breaks large prompts into 512-token chunks. This flattened latency spikes from outlier prompts and reduced the prefill GPU requirement from 5 to 4 by improving utilization across requests.
 
----
+
 
 ## Optimizations
 
@@ -372,25 +367,22 @@ flowchart LR
 When a prefill node's LRU cache starts evicting under memory pressure, the gateway detects it via vLLM's metrics endpoint and clears that creator's routing
 entry. No sticky routing is permanent — just preferred.
 
----
 
 ## Where it failed slowly?
 
-The happy path took a week to build. The edge cases took two months to stabilize.
-Here are the three failures that cost me the most time.
+The happy path took a week to build. The edge cases took two months to stabilize. Here are the three failures that cost me the most time.
 
 
-### Failure 1: The NCCL Deadlock at 2am
+### Failure 1: The NCCL Deadlock
 
-**Symptom:** Throughput dropped to zero. No OOM. No crash. All pods healthy.
+Throughput dropped to zero. No OOM. No crash. All pods healthy.
 GPU utilization: 0% compute, 100% memory. The system was alive and doing nothing.
 
 The prefill nodes had finished computing KV caches and were blocked on
 `ncclSend()`, waiting for the decode node to call the matching `ncclRecv()`.
-The decode node never called it — its block table was full from in-flight decode requests that hadn't finished yet.
+The decode node never called it, its block table was full from in-flight decode requests that hadn't finished yet.
 
-NCCL collectives are synchronous barriers. Both sides must call the operation.
-If one side is stuck waiting for memory, the other hangs forever. No timeout by default.
+NCCL collectives are synchronous barriers. Both sides must call the operation. If one side is stuck waiting for memory, the other hangs forever. No timeout by default.
 
 ```python
 # Diagnosis: poll decode node's free block count before dispatching prefill
@@ -404,7 +396,7 @@ metrics = requests.get("http://decode-node:8200/metrics").text
 
 ### Failure 2: The Hot Creator Problem
 
-**Symptom:** One prefill node at 100% utilization. Three others at 20%. P99 latency for one creator segment was 4x the rest. Cache hit rate was perfect, that was the problem.
+One prefill node at 100% utilization. Three others at 20%. P99 latency for one creator segment was 4x the rest. Cache hit rate was perfect, that was the problem.
 
 Creator ID 8471 had 50,000 active fans. Every request routed to prefill-node-2. Exclusively. While nodes 0, 1, and 3 sat idle. The pure-hash routing had no load awareness at all.
 
@@ -424,13 +416,11 @@ def route(creator_id, nodes, metrics):
     return preferred
 ```
 
-**Fix:** Above 85% utilization, spill to the least loaded node and accept one
-cold prefill hit. The 1,800-token cold prefill adds ~12ms to TTFT — far better
-than a 400ms queue. Cache miss rate from spilling at peak: ~8%. Mean TTFT
-improved because queue time was worse than the cold prefill cost.
+**Fix:** Above 85% utilization, spill to the least loaded node and accept one cold prefill hit. The 1,800-token cold prefill adds ~12ms to TTFT, far better than a 400ms queue. Cache miss rate from spilling at peak: ~8%. Mean TTFT improved because queue time was worse than the cold prefill cost.
 
 
 ### The edge case I still haven't fully solved
+---
 
 TP=4 on prefill means KV cache is sharded across 4 GPUs. Before transfer to the TP=1 decode node, the cache must be gathered onto one GPU first, an NCCL
 all-gather across all 4 prefill GPUs. At peak load, these all-gathers compete
