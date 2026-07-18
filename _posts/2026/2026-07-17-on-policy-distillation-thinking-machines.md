@@ -17,11 +17,10 @@ Most teams doing knowledge distillation do the same thing. Run a large teacher m
 
 That is off-policy distillation. And it has a flaw that nobody talks about when they share their benchmark numbers: you are training the student to navigate the teacher's world, not its own. At inference time, the student operates in its own world, the one it was never trained for.
 
-Thinking Machines Lab published [this blogpost](https://thinkingmachines.ai/blog/on-policy-distillation/) showing they trained a 0.5B model to match a 1.5B teacher's performance on math reasoning at **9–30x lower compute than RL**, just by switching from off-policy to on-policy. The training loop fits in 10 lines of PyTorch. 
+Thinking Machines Lab published <a href="https://thinkingmachines.ai/blog/on-policy-distillation" target="_blank" rel="noopener noreferrer">this blogpost</a> by thinking machines lab showing they trained a 0.5B model to match a 1.5B teacher's performance on math reasoning at **9–30x lower compute than RL**, just by switching from off-policy to on-policy. The training loop fits in 10 lines of PyTorch. 
 
 This post explains why the switch matters and exactly what changes in the code.
 
----
 
 ## Table of Contents
 1. [What Off-Policy Distillation Actually Is](#what-off-policy-distillation-actually-is)
@@ -33,7 +32,7 @@ This post explains why the switch matters and exactly what changes in the code.
 7. [Run It Yourself: Colab Demo](#run-it-yourself-colab-demo)
 8. [Summary](#summary)
 
----
+
 
 ## What Off-Policy Distillation Actually Is
 
@@ -159,7 +158,6 @@ The training data distribution now matches the inference distribution. The compo
 | Compounding error | Yes, grows with sequence length | No, trains on its own mistakes |
 | Reward density | Dense (every token) | Dense (every token) |
 
----
 
 ## The Loss Function: Reverse KL
 
@@ -302,7 +300,6 @@ flowchart LR
 This unlocks a practical continual learning loop: fine-tune on new knowledge, then on-policy distill from the previous version to recover behaviour. Repeat indefinitely.
 
 
-
 ## Run It Yourself: Colab Demo
 
 I built a self-contained notebook that runs this exact loop on GSM8K grade-school math with Qwen2.5-0.5B as student and Qwen2.5-1.5B as teacher. Runs on a Colab T4 free tier ~35 minutes, ~9 GB VRAM.
@@ -314,9 +311,6 @@ The notebook includes:
 - The full training loop from this post, step by step
 - Accuracy after 250 steps of on-policy distillation
 - A per-token KL visualisation: which exact tokens in a wrong answer the teacher most strongly disagreed with
-
-
-
 
 
 ## Summary
