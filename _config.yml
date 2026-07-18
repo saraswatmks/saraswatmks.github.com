@@ -52,7 +52,7 @@ footer_scripts:
 analytics:
   provider: "google"
   google:
-    tracking_id: "UA-146372185-1"
+    tracking_id: "G-1J9NJFY1Z8"
     anonymize_ip: false
 
 # Build settings
