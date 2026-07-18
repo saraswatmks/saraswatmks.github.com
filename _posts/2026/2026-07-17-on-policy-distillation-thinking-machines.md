@@ -6,9 +6,12 @@ tags:
 - llm
 - finetuning
 - rlhf
+header:
+  teaser: /assets/images/on_off_policy.png
+  overlay_image: /assets/images/on_off_policy.png
+  overlay_filter: 0.5
 ---
 
-# Training LLMs using Off-Policy vs On-Policy Distillation
 
 Most teams doing knowledge distillation do the same thing. Run a large teacher model on a dataset. Save the outputs. Fine-tune the small student model on those outputs. Done!
 
